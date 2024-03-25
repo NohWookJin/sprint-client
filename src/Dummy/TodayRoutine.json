@@ -1,0 +1,18 @@
+{
+  "response": {
+    "todo": [
+      {
+        "id": 1,
+        "name": "TIL",
+        "count": 3
+      }
+    ],
+    "blog": [
+      {
+        "id": 2,
+        "name": "알고리즘",
+        "count": 1
+      }
+    ]
+  }
+}
