@@ -14,9 +14,9 @@ const MainLayout = () => {
   //   );
 
   return (
-    <div className="mx-auto min-h-dvh min-w-[350px] max-w-[412px] bg-white">
+    <div className="mx-auto min-h-dvh min-w-[360px] max-w-[640px]">
       <Header />
-      <div className="h-full px-5">
+      <div className="h-full min-w-[640px]">
         <Outlet />
       </div>
       {/* {showNav && <Nav />} */}
