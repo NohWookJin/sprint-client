@@ -62,7 +62,7 @@ const AnalysisItem: React.FC<AnalysisItemProps> = ({
               <div
                 key={date}
                 title={date}
-                className={`w-[10.5px] h-[10.5px] ${
+                className={`w-[11px] h-[11px] ${
                   didActivity ? "bg-[#3A7CE1] opacity-[0.95]" : "bg-gray-200"
                 } rounded-[3px] mr-[1px]`}
               ></div>
