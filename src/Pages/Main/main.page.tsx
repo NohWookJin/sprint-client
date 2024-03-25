@@ -1,5 +1,11 @@
+import Main from "../../Components/Main/Main";
+
 const Mainpage = () => {
-  return <div>Main.page</div>;
+  return (
+    <section className="max-w-[640px] ">
+      <Main />
+    </section>
+  );
 };
 
 export default Mainpage;
