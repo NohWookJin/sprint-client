@@ -7,7 +7,7 @@ const Analysis: React.FC = () => {
   const activities = Object.values(jsonData.response).flat();
 
   return (
-    <section className="pb-8 px-4 mb-[20px]">
+    <section className="pb-8 mb-[20px]">
       <div className="font-bold">
         <span className="text-[23px]">스프린터님의 루틴 기록이에요.</span>
       </div>
