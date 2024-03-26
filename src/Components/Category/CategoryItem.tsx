@@ -12,7 +12,7 @@ const CategoryItem = ({
   selectedCategory,
   onClickCategory,
 }: CategoryItemProps) => {
-  const { name } = item;
+  const { name, routine_type, id } = item;
 
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const CategoryItem = ({
     if (item.id === 0) {
       navigate(`/`);
     } else {
-      navigate(`/routine/${item.id}`);
+      navigate(`/routine/${item.id}`, { state: { routine_type, id } });
     }
   };
 

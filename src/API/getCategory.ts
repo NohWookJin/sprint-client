@@ -7,6 +7,7 @@ export interface Categories {
 export interface CategoriesItem {
   id: number;
   name: string;
+  routine_type: string | null;
 }
 
 export const getCategory = () => {
