@@ -10,6 +10,7 @@ export interface TodayRoutine {
 }
 
 export interface RoutineItem {
+  routine_type: string | null;
   id: number;
   name: string;
   count: number;

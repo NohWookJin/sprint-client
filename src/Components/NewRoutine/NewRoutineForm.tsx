@@ -71,7 +71,7 @@ const NewRoutineForm = () => {
               </span>
             </div>
             <span className="text-[12px] pt-[3px] opacity-[0.6]">
-              투두리스트는 완료율이 다양해요.
+              예시 이미지 첨부 예정
             </span>
           </label>
           <label className="min-w-[300px] flex flex-col">
@@ -87,7 +87,7 @@ const NewRoutineForm = () => {
               </span>
             </div>
             <span className=" text-[12px] pt-[3px] opacity-[0.6]">
-              블로그는 완료율이 0%와 100%만 존재해요.
+              예시 이미지 첨부 예정
             </span>
           </label>
         </div>

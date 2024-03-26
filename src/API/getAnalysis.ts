@@ -33,7 +33,7 @@ export const generateDummyData = (): ActivitiesResponse => {
         {
           name: "TIL",
           start_with: startDate.toISOString().split("T")[0],
-          continuity: 13,
+          continuity: 30,
           calendar: [activityCalendar],
         },
       ],

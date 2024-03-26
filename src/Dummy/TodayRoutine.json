@@ -3,6 +3,7 @@
     "todo": [
       {
         "id": 1,
+        "routine_type": "todo",
         "name": "TIL",
         "count": 3
       }
@@ -10,6 +11,7 @@
     "blog": [
       {
         "id": 2,
+        "routine_type": "blog",
         "name": "알고리즘",
         "count": 1
       }
