@@ -1,0 +1,7 @@
+{
+  "response": [
+    { "id": 0, "name": "전체", "routine_type": null },
+    { "id": 1, "name": "TIL", "routine_type": "todo" },
+    { "id": 2, "name": "알고리즘", "routine_type": "blog" }
+  ]
+}
