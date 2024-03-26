@@ -8,7 +8,6 @@ const MainTodayRoutine = () => {
   useEffect(() => {
     const data = getTodayRoutine();
     if (data) setTodayRoutine(data.response);
-    console.log(data.response);
   }, []);
 
   if (todayRoutine) {

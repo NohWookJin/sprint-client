@@ -1,13 +1,21 @@
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Category from "../../Components/Category/Category";
+import RoutineBlogDetail from "../../Components/RoutineBlogDetail/RoutineBlogDetail";
+import RoutineTodoDetail from "../../Components/RotineTodoDetail/RoutineTodoDetail";
 
 const RoutinePage = () => {
-  const params = useParams();
+  const location = useLocation();
+  const { routine_type, id } = location.state || {};
 
   return (
     <div>
       <Category />
-      {params.id}
+      {routine_type === "todo" ? (
+        <RoutineTodoDetail routineId={id} />
+      ) : (
+        <RoutineBlogDetail />
+        // <RoutineBlogDetail routineId={id} />
+      )}
     </div>
   );
 };
