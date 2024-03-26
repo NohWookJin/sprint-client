@@ -10,12 +10,12 @@ const MainTodayRoutineItem = ({
   item,
   category,
 }: MainTodayRoutineItemProps) => {
-  const { name, count, id } = item;
+  const { name, count, id, routine_type } = item;
 
   const navigate = useNavigate();
 
   const onClickItem = () => {
-    navigate(`/routine/${id}`);
+    navigate(`/routine/${id}`, { state: { routine_type, id } });
   };
 
   return (
