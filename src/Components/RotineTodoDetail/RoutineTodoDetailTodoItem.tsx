@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Todo } from "../../API/getRoutine";
+import type { Todo } from "../../API/getRoutineTodo";
 
 interface RoutineTodoDetailTodoItemProps {
   todo: Todo;

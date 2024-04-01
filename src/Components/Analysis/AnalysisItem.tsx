@@ -38,7 +38,7 @@ const AnalysisItem: React.FC<AnalysisItemProps> = ({
   return (
     <div className="flex flex-col gap-4 mb-[20px]">
       <div className="flex flex-col">
-        <div className="w-full text-lg font-semibold text-white italic rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 shadow-lg py-2 px-4 transform">
+        <div className="w-full text-lg font-semibold text-white rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 shadow-lg py-2 px-4 transform">
           {name}
         </div>
         <div className="flex flex-col pt-[10px]">
@@ -62,7 +62,7 @@ const AnalysisItem: React.FC<AnalysisItemProps> = ({
               <div
                 key={date}
                 title={date}
-                className={`w-[11px] h-[11px] ${
+                className={`w-[11px] h-[12px] ${
                   didActivity ? "bg-[#3A7CE1] opacity-[0.95]" : "bg-gray-200"
                 } rounded-[3px] mr-[1px]`}
               ></div>
