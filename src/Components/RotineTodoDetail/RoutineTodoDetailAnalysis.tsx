@@ -1,4 +1,4 @@
-import { Analysis } from "../../API/getRoutine";
+import { Analysis } from "../../API/getRoutineTodo";
 import { ActivitiesResponse, generateDummyData } from "../../API/getAnalysis";
 import RoutineDetailAnalysisItem from "../Analysis/RoutineDetailAnalysisItem";
 

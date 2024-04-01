@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Past, Todo } from "../../API/getRoutine";
+import { Past, Todo } from "../../API/getRoutineTodo";
 
 interface RoutineTodoDetailPastProps {
   name: string;
@@ -20,6 +20,7 @@ const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
 
   const isAllCompleted = (todos: Todo[]) =>
     todos.every((todo) => todo.completed);
+
   return (
     <section className="mb-[60px]">
       <div className="flex flex-col gap-[5px]">
@@ -36,14 +37,14 @@ const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
       {Object.entries(past).map(([date, todos]) => (
         <div
           key={date}
-          className="mt-[20px] w-full text-lg font-semibold text-white italic rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 shadow-lg py-2 px-4 transform flex flex-col mb-[10px]"
+          className="mt-[20px] w-full text-lg font-semibold rounded-lg  border border-[#d9d9d9] py-3 px-4 transform flex flex-col mb-[5px]"
         >
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <h2 className="text-[18px] font-bold">{date}</h2>
               <span
                 className={`pl-[20px] text-[14px] font-normal mt-[1px] ${
-                  isAllCompleted(todos) ? "text-[#ffd700]" : "text-[#ff6961]"
+                  isAllCompleted(todos) ? "text-[#3a7ce1]" : "text-[#ff6961]"
                 }`}
               >
                 {isAllCompleted(todos) ? " SPRINT 완료" : " SPRINT 실패"}

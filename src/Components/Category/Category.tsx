@@ -17,10 +17,15 @@ const Category = () => {
 
   useEffect(() => {
     const data = getCategory();
+
     if (data) setCategories(data);
 
     if (params.id !== undefined) {
       setSelectedCategory(Number(params.id));
+      if (location.pathname.includes("detail")) {
+        const splitSegments = location.pathname.split("/");
+        setSelectedCategory(Number(splitSegments[2]));
+      }
     }
     if (params.id === undefined && location.pathname === "/routine/new") {
       setSelectedCategory(null);

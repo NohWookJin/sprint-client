@@ -5,6 +5,8 @@ import LoginPage from "../Pages/User/login.page";
 import Mainpage from "../Pages/Main/main.page";
 import NewRoutinePage from "../Pages/Routine/new.page";
 import RoutinePage from "../Pages/Routine/routine.page";
+import RoutineDetailViewPage from "../Pages/RoutineDetail/routineDetailView.page.";
+import RoutineDetailPostPage from "../Pages/RoutineDetail/routineDetailPost.page";
 
 const MainRouter = () => {
   return (
@@ -16,6 +18,11 @@ const MainRouter = () => {
           <Route index element={<Mainpage />} />
           <Route path="/routine/new" element={<NewRoutinePage />} />
           <Route path="/routine/:id" element={<RoutinePage />} />
+          <Route path="/routine/:id/new" element={<RoutineDetailPostPage />} />
+          <Route
+            path="/routine/:routineId/detail/:date/:id"
+            element={<RoutineDetailViewPage />}
+          />
         </Route>
       </Routes>
     </>

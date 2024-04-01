@@ -1,0 +1,19 @@
+.ql-container {
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: #565759;
+  border: none !important;
+  min-height: 75vh;
+  margin: 0px;
+}
+
+.ql-editor {
+  min-height: 40rem;
+}
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+  margin-bottom: 15px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+}
