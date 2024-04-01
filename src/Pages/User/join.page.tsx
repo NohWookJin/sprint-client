@@ -1,5 +1,7 @@
+import Join from "../../Components/User/Join";
+
 const JoinPage = () => {
-  return <div>join.page</div>;
+  return <Join />;
 };
 
 export default JoinPage;
