@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import RoutineTodoDetailTodoItem from "./RoutineTodoDetailTodoItem";
-import type { Todo } from "../../API/getRoutine";
+import type { Todo } from "../../API/getRoutineTodo";
 
 interface RoutineTodoDetailTodoProps {
   todo: Todo[];

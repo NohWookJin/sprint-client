@@ -1,4 +1,4 @@
-import data from "../Dummy/Routine.json";
+import data from "../Dummy/RoutineTodo.json";
 
 export interface Response {
   name: string;
@@ -24,7 +24,7 @@ export interface Analysis {
   average: number;
 }
 
-export const getRoutine = (): Response => {
+export const getRoutineTodo = (): Response => {
   const res = data;
 
   return res.response;

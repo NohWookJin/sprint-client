@@ -4,7 +4,7 @@ import RoutineTodoDetailTodo from "./RoutineTodoDetailTodo";
 import RoutineTodoDetailAnalysis from "./RoutineTodoDetailAnalysis";
 import RoutineTodoDetailPast from "./RoutineTodoDetailPast";
 
-import { getRoutine, Response } from "../../API/getRoutine";
+import { getRoutineTodo, Response } from "../../API/getRoutineTodo";
 
 interface RoutineTodoDetailProps {
   routineId: number;
@@ -53,9 +53,9 @@ const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
   };
 
   useEffect(() => {
-    const res = getRoutine();
+    const res = getRoutineTodo();
     setData(res);
-    // getRoutine(routineId);  추후 API
+    // getRoutineTodo(routineId);  추후 API
   }, [routineId]);
 
   if (data) {

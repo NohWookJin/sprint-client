@@ -13,8 +13,7 @@ const RoutinePage = () => {
       {routine_type === "todo" ? (
         <RoutineTodoDetail routineId={id} />
       ) : (
-        <RoutineBlogDetail />
-        // <RoutineBlogDetail routineId={id} />
+        <RoutineBlogDetail routineId={id} />
       )}
     </div>
   );
