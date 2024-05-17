@@ -33,9 +33,9 @@ const Profile = () => {
             <span className="font-semibold text-[22px]">
               오늘도 성장을 위해 SPRINT 해볼까요?
             </span>
-            <button className="text-[14px] opacity-[0.4] mt-[2px]">
+            {/* <button className="text-[14px] opacity-[0.4] mt-[2px]">
               출석하기
-            </button>
+            </button> */}
           </div>
           <div className="flex flex-col gap-[5px]">
             <span className="text-[18px] font-semibold">SPRINTER</span>
