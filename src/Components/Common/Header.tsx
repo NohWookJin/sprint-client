@@ -9,7 +9,7 @@ const Header = () => {
     setCookieLogout("SP_AES");
     setCookieLogout("SP_USER_EMAIL");
     setCookieLogout("SP_USER_NAME");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -24,12 +24,18 @@ const Header = () => {
           </span>
         </div>
       </div>
-      <div className="flex justify-between gap-[10px] pb-[12px]">
+      <div className="flex justify-between items-center gap-[15px] pb-[12px]">
         {/* <span className="text-[14px]">후원하기</span> */}
-        {/* <span className="text-[14px]">내 정보</span> */}
+        {accessToken && (
+          <div onClick={() => navigate("/routine/setting")}>
+            <span className="text-[14px] cursor-pointer opacity-[0.6]">
+              루틴 설정
+            </span>
+          </div>
+        )}
         {accessToken ? (
           <div onClick={onClikcLogout}>
-            <span className="text-[14px] cursor-pointer opacity-[0.7]">
+            <span className="text-[14px] cursor-pointer opacity-[0.6]">
               로그아웃
             </span>
           </div>

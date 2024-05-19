@@ -1,16 +1,14 @@
-import data from "../Dummy/RoutineTodo.json";
+import { instance } from "../lib/userAuth";
 
 export interface Response {
-  name: string;
-  date: string;
   todo: Todo[];
-  analysis: Analysis;
   past: Past;
 }
 
 export interface Todo {
   id: number;
   content: string;
+  date: string;
   completed: boolean;
 }
 
@@ -18,14 +16,10 @@ export interface Past {
   [key: string]: Todo[];
 }
 
-export interface Analysis {
-  start_with: string;
-  continuity: number;
-  average: number;
-}
+export const getRoutineTodo = async (routineId: number): Promise<Response> => {
+  const { data } = await instance.get(`/routines/${routineId}/todos`);
 
-export const getRoutineTodo = (): Response => {
-  const res = data;
+  console.log(data);
 
-  return res.response;
+  return data;
 };

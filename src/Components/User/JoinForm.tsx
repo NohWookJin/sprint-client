@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignupForm, signUp } from "../../API/getUser";
+import { SignupForm, signUp } from "../../API/users";
 import {
   isValidEmailType,
   isValidName,
   isValidPassword,
   isEnteredSamePassword,
-} from "../../lib/isValidJoinForm";
+} from "../../lib/validateJoinForm";
 
 const JoinForm = () => {
   const [formData, setFormData] = useState<SignupForm>({

@@ -26,8 +26,8 @@ const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
       <div className="flex flex-col gap-[5px]">
         <div className="flex items-center gap-[10px]">
           <h1 className="text-[26px] font-semibold">지난 {name}</h1>
-          <span className="opacity-[0.6] text-[13px] mt-[10px]">
-            지난 투두리스트는 삭제할 수 없어요.
+          <span className="opacity-[0.6] text-[11px] mt-[10px]">
+            지난 투두리스트는 삭제는 추후 업데이트 예정입니다.
           </span>
         </div>
         <span className="opacity-[0.6] text-[14px]">

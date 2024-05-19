@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import RoutineBlogDetailBlog from "./RoutineBlogDetailBlog";
-import RoutineTodoDetailAnalysis from "../RotineTodoDetail/RoutineTodoDetailAnalysis";
+// import RoutineTodoDetailAnalysis from "../RotineTodoDetail/RoutineTodoDetailAnalysis";
 import RoutineBlogDetailPast from "./RoutineBlogDetailPast";
 
 import { getRoutineBlog, Response } from "../../API/getRoutineBlog";
@@ -44,7 +44,7 @@ const RoutineBlogDetail = ({ routineId }: RoutineBlogDetailProps) => {
           </div>
         </div>
         <RoutineBlogDetailBlog blog={data.blog} routineId={routineId} />
-        <RoutineTodoDetailAnalysis name={data.name} analysis={data.analysis} />
+        {/* <RoutineTodoDetailAnalysis name={data.name} analysis={data.analysis} /> */}
         <RoutineBlogDetailPast
           name={data.name}
           past={data.past}
