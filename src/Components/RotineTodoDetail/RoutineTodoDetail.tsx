@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-
 import RoutineTodoDetailTodo from "./RoutineTodoDetailTodo";
-import RoutineTodoDetailAnalysis from "./RoutineTodoDetailAnalysis";
+// import RoutineTodoDetailAnalysis from "./RoutineTodoDetailAnalysis";
 import RoutineTodoDetailPast from "./RoutineTodoDetailPast";
-
-import { getRoutineTodo, Response } from "../../API/getRoutineTodo";
+import { RoutineData, getRoutineTodoAll } from "../../API/routines";
+import { formatTodayDate } from "../../lib/timeFormatChange";
+import { deleteTodo, patchTodo, postTodo } from "../../API/routinesTodo";
 
 interface RoutineTodoDetailProps {
   routineId: number;
 }
 
 const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
-  const [data, setData] = useState<Response | null>(null);
+  const [todos, setTodos] = useState<RoutineData | null>(null);
+  const [todayDate, setTodayDate] = useState<string>("");
+  const [isTodosChanged, setIsTodosChanged] = useState<boolean>(false);
 
   const onToggleTodo = (todoId: number) => {
-    setData((currentData) => {
+    setTodos((currentData) => {
       if (!currentData) return null;
-      const updatedTodos = currentData.todo.map((todo) => {
+      const updatedTodos = currentData.today.map((todo) => {
         if (todo.id === todoId) {
           return { ...todo, completed: !todo.completed };
         }
@@ -26,55 +28,60 @@ const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
     });
   };
 
-  const onAddTodo = (content: string) => {
-    setData((currentData) => {
-      if (!currentData) return null;
-      const newTodo = {
-        id: Date.now(), // id 숫자로 변경해야 함.
-        content,
-        completed: false,
-      };
-      const updatedTodos = [...currentData.todo, newTodo];
-      return { ...currentData, todo: updatedTodos };
-    });
+  const onAddTodo = async (content: string) => {
+    const res = await postTodo(routineId, content);
+    if (res) setIsTodosChanged(true);
   };
 
-  const onEditTodo = (todoId: number, newContent: string) => {
-    setData((currentData) => {
-      if (!currentData) return null;
-      const updatedTodos = currentData.todo.map((todo) => {
-        if (todo.id === todoId) {
-          return { ...todo, content: newContent };
-        }
-        return todo;
-      });
-      return { ...currentData, todo: updatedTodos };
-    });
+  const onEditTodo = async (todoId: number, newContent: string) => {
+    const res = await patchTodo(routineId, todoId, newContent);
+    if (res) setIsTodosChanged(true);
+  };
+
+  const onDeleteTodo = async (todoId: number) => {
+    const res = await deleteTodo(routineId, todoId);
+    if (res) setIsTodosChanged(true);
   };
 
   useEffect(() => {
-    const res = getRoutineTodo();
-    setData(res);
-    // getRoutineTodo(routineId);  추후 API
-  }, [routineId]);
+    const fetchData = async () => {
+      const data = await getRoutineTodoAll(routineId);
 
-  if (data) {
+      console.log(data);
+
+      if (data) {
+        setTodos(data);
+        setTodayDate(formatTodayDate());
+        setIsTodosChanged(false);
+      }
+    };
+
+    if (isTodosChanged) fetchData();
+
+    fetchData();
+  }, [isTodosChanged, routineId]);
+
+  if (todos) {
     return (
       <section>
         <h1 className="text-[28px] font-bold text-[#3A7CE1] pb-[5px]">
-          {data.name}
+          {todos.name}
         </h1>
         <div className="pb-[20px] font-semibold text-[20px]">
-          {data.date}, 오늘의 투두리스트
+          {todayDate} - 오늘의 투두 리스트
         </div>
         <RoutineTodoDetailTodo
-          todo={data.todo}
+          todos={todos.today}
           onToggleTodo={onToggleTodo}
           onAddTodo={onAddTodo}
           onEditTodo={onEditTodo}
+          onDeleteTodo={onDeleteTodo}
         />
-        <RoutineTodoDetailAnalysis name={data.name} analysis={data.analysis} />
-        <RoutineTodoDetailPast name={data.name} past={data.past} />
+        {/* <RoutineTodoDetailAnalysis
+          name={todos.name}
+          analysis={todos.analysis}
+        /> */}
+        <RoutineTodoDetailPast name={todos.name} past={todos.past} />
       </section>
     );
   }

@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginDataForm, login } from "../../API/getUser";
+import { LoginDataForm, login } from "../../API/users";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState<LoginDataForm>({
     email: "",
     password: "",
   });
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [isValidForm, setIsValidForm] = useState<boolean>(false);
   const [isNotUser, setIsNotUser] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const LoginForm = () => {
         ...prev,
         [name]: value,
       };
-      setIsFormValid(isValidateForm(newFormData));
+      setIsValidForm(isValidateForm(newFormData));
       return newFormData;
     });
   };
@@ -78,11 +78,11 @@ const LoginForm = () => {
           <button
             type="submit"
             className={`w-full font-semibold px-4 py-2 rounded-[5px] text-white ${
-              isFormValid
+              isValidForm
                 ? "bg-[#3a7ce1] cursor-pointer"
                 : "bg-gray-400 cursor-not-allowed"
             }`}
-            disabled={!isFormValid}
+            disabled={!isValidForm}
           >
             로그인
           </button>

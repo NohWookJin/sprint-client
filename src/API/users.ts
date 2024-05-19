@@ -6,6 +6,7 @@ import {
   setCookieUserInfo,
 } from "../lib/userCookie";
 
+// 회원가입
 export interface RequestSignup {
   signUpformData: SignupForm;
 }
@@ -24,13 +25,14 @@ export const signUp = async (
   return res.data;
 };
 
+// 로그인
 export interface LoginDataForm {
   email: string;
   password: string;
 }
 
-export const login = async (loginFormData: LoginDataForm) => {
-  const { data } = await instance.post(`/login`, loginFormData);
+export const login = async (form: LoginDataForm) => {
+  const { data } = await instance.post(`/login`, form);
 
   if (data && data.accessToken) {
     setCookieLogin(String(data.accessToken));
@@ -39,6 +41,7 @@ export const login = async (loginFormData: LoginDataForm) => {
   return data;
 };
 
+// 사용자 조회
 interface ResponseUserInfo {
   email: string;
   name: string;

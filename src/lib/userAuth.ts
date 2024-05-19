@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie, setCookieLogout } from "./userCookie";
-import { isTokenExpired } from "./isTokenExpired";
+import { isTokenExpired } from "./tokenExpiringCheck";
 
 export const instance = axios.create({
   baseURL: "https://api.sprints.co.kr/",
