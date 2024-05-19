@@ -7,6 +7,17 @@ interface RoutineTodoDetailPastProps {
 }
 
 const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
+  const sortedPast: { [date: string]: Todo[] } = Object.entries(past)
+    .sort(([dateA], [dateB]) => (dateA > dateB ? -1 : 1))
+    .reduce((acc: { [date: string]: Todo[] }, [date, todos]) => {
+      // 날짜 변경 로직 추가
+      const newDate = new Date(date);
+      newDate.setDate(newDate.getDate() + 1); // 1일을 더해줌
+      const newDateString = newDate.toISOString().split("T")[0];
+      acc[newDateString] = todos;
+      return acc;
+    }, {});
+
   const [isClickedPrevTodos, setIsClickedPrevTodos] = useState<{
     [date: string]: boolean;
   }>({});
@@ -34,7 +45,7 @@ const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
           * 클릭하면 자세히 볼 수 있어요.
         </span>
       </div>
-      {Object.entries(past).map(([date, todos]) => (
+      {Object.entries(sortedPast).map(([date, todos]) => (
         <div
           key={date}
           className="mt-[20px] w-full text-lg font-semibold rounded-lg  border border-[#d9d9d9] py-3 px-4 transform flex flex-col mb-[5px]"

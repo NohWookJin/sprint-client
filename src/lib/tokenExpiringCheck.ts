@@ -5,11 +5,5 @@ export const isTokenExpired = (token: string): boolean => {
   const exp = payload.exp * 1000;
   const now = Date.now();
 
-  if (now < exp) {
-    console.log("exp", exp);
-    console.log("now", now);
-    console.log("now < exp, not expired yet.");
-  }
-
   return now > exp;
 };

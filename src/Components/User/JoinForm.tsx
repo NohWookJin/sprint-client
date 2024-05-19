@@ -105,7 +105,6 @@ const JoinForm = () => {
       navigate("/login");
     } catch (error) {
       console.error("회원가입 실패", error);
-      console.log("아이디 중복/조건 불일치 또는 패스워드 조건 불일치 : ALERT");
     }
   };
 

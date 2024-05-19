@@ -19,7 +19,6 @@ const RoutineSetting = () => {
   const onEditRoutine = async (routineId: number, newName: string) => {
     const res = await patchRoutineName(routineId, newName);
     if (res) {
-      alert(1);
       setIsRoutineChanged(true);
     }
   };

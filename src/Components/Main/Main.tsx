@@ -1,7 +1,7 @@
 import Category from "../Category/Category";
 import Profile from "../Profile/Profile";
 import MainTodayRoutine from "./MainTodayRoutine";
-import Analysis from "../Analysis/Analysis";
+// import Analysis from "../Analysis/Analysis";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../../API/users";
 import { getCookie } from "../../lib/userCookie";
@@ -26,7 +26,7 @@ const Main = () => {
           <Category />
           <Profile />
           <MainTodayRoutine />
-          <Analysis />
+          {/* <Analysis /> */}
         </>
       ) : (
         <>
