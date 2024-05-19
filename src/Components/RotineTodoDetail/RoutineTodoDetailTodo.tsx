@@ -4,7 +4,7 @@ import type { Todo } from "../../API/routines";
 
 interface RoutineTodoDetailTodoProps {
   todos: Todo[];
-  onToggleTodo: (id: number) => void;
+  onToggleTodo: (id: number, completed: boolean) => void;
   onAddTodo: (content: string) => void;
   onEditTodo: (id: number, content: string) => void;
   onDeleteTodo: (id: number) => void;

@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import RoutineTodoDetailTodo from "./RoutineTodoDetailTodo";
-// import RoutineTodoDetailAnalysis from "./RoutineTodoDetailAnalysis";
+import RoutineTodoDetailAnalysis from "./RoutineTodoDetailAnalysis";
 import RoutineTodoDetailPast from "./RoutineTodoDetailPast";
 import { RoutineData, getRoutineTodoAll } from "../../API/routines";
 import { formatTodayDate } from "../../lib/timeFormatChange";
-import { deleteTodo, patchTodo, postTodo } from "../../API/routinesTodo";
+import {
+  changeCompletionTodo,
+  deleteTodo,
+  patchTodo,
+  postTodo,
+} from "../../API/routinesTodo";
 
 interface RoutineTodoDetailProps {
   routineId: number;
@@ -15,17 +20,10 @@ const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
   const [todayDate, setTodayDate] = useState<string>("");
   const [isTodosChanged, setIsTodosChanged] = useState<boolean>(false);
 
-  const onToggleTodo = (todoId: number) => {
-    setTodos((currentData) => {
-      if (!currentData) return null;
-      const updatedTodos = currentData.today.map((todo) => {
-        if (todo.id === todoId) {
-          return { ...todo, completed: !todo.completed };
-        }
-        return todo;
-      });
-      return { ...currentData, todo: updatedTodos };
-    });
+  const onToggleTodo = async (contentId: number, completed: boolean) => {
+    const res = await changeCompletionTodo(routineId, contentId, completed);
+
+    if (res) setIsTodosChanged(true);
   };
 
   const onAddTodo = async (content: string) => {
@@ -46,8 +44,6 @@ const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getRoutineTodoAll(routineId);
-
-      console.log(data);
 
       if (data) {
         setTodos(data);
@@ -77,10 +73,10 @@ const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
           onEditTodo={onEditTodo}
           onDeleteTodo={onDeleteTodo}
         />
-        {/* <RoutineTodoDetailAnalysis
-          name={todos.name}
-          analysis={todos.analysis}
-        /> */}
+        <RoutineTodoDetailAnalysis
+          routineId={routineId}
+          startDate={todos.date as string}
+        />
         <RoutineTodoDetailPast name={todos.name} past={todos.past} />
       </section>
     );

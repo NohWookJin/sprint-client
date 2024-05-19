@@ -3,7 +3,7 @@ import type { Todo } from "../../API/routines";
 
 interface RoutineTodoDetailTodoItemProps {
   todo: Todo;
-  onToggleTodo: (id: number) => void;
+  onToggleTodo: (id: number, completed: boolean) => void;
   onEditTodo: (id: number, content: string) => void;
   onDeleteTodo: (id: number) => void;
 }
@@ -15,6 +15,7 @@ const RoutineTodoDetailTodoItem = ({
   onDeleteTodo,
 }: RoutineTodoDetailTodoItemProps) => {
   const { content, id, completed } = todo;
+  const [isCompleted, setIsCompleted] = useState<boolean>(completed);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editedContent, setEditedContent] = useState<string>(content);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -22,6 +23,12 @@ const RoutineTodoDetailTodoItem = ({
   const onSaveEditContent = () => {
     onEditTodo(id, editedContent);
     setIsEditing(false);
+  };
+
+  const onToggleCompleted = () => {
+    const newCompleted = !isCompleted;
+    setIsCompleted(!isCompleted);
+    onToggleTodo(id, newCompleted);
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -40,8 +47,8 @@ const RoutineTodoDetailTodoItem = ({
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
-          checked={completed}
-          onChange={() => onToggleTodo(id)}
+          checked={isCompleted}
+          onChange={onToggleCompleted}
         />
         {isEditing ? (
           <form onSubmit={onSubmit}>
@@ -55,7 +62,9 @@ const RoutineTodoDetailTodoItem = ({
           </form>
         ) : (
           <span
-            className={`truncate ${completed ? "line-through opacity-60" : ""}`}
+            className={`truncate ${
+              isCompleted ? "line-through opacity-60" : ""
+            }`}
           >
             {content}
           </span>

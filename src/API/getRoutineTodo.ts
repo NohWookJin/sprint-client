@@ -19,7 +19,5 @@ export interface Past {
 export const getRoutineTodo = async (routineId: number): Promise<Response> => {
   const { data } = await instance.get(`/routines/${routineId}/todos`);
 
-  console.log(data);
-
   return data;
 };
