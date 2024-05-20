@@ -1,10 +1,7 @@
-import data from "../Dummy/RoutineBlog.json";
+import { instance } from "../lib/userAuth";
 
 export interface Response {
-  name: string;
-  date: string;
   blog: Blog[];
-  analysis: Analysis;
   past: Past;
 }
 
@@ -12,20 +9,15 @@ export interface Blog {
   id: number;
   title: string;
   content: string;
+  date: string;
 }
 
 export interface Past {
   [key: string]: Blog[];
 }
 
-export interface Analysis {
-  start_with: string;
-  continuity: number;
-  average: number;
-}
+export const getRoutineBlog = async (routineId: number): Promise<Response> => {
+  const { data } = await instance.get(`/routines/${routineId}/blogs`);
 
-export const getRoutineBlog = (): Response => {
-  const res = data;
-
-  return res.response;
+  return data;
 };

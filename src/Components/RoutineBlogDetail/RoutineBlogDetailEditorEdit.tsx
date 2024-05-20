@@ -6,15 +6,16 @@ import {
   useRef,
   useState,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
 import { formats } from "./QuillEditor";
 import "react-quill/dist/quill.snow.css";
 import "./QuillStlye.css";
-import { postBlog } from "../../API/routinesBlog";
-import { formatDateToISO } from "../../lib/timeFormatChange";
+import { patchBlog } from "../../API/routinesBlog";
+import { useSetRecoilState } from "recoil";
+import { editState } from "../../Store/editState";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
@@ -25,16 +26,29 @@ interface BlogForm {
   image?: File;
 }
 
-const RoutineBlogDetailEditor = () => {
-  const location = useLocation();
+interface EditProps {
+  routineId: number;
+  contentId: number;
+  title: string;
+  content: string;
+  date: string;
+}
+
+const RoutineBlogDetailEditorEdit = ({
+  routineId,
+  contentId,
+  title,
+  content,
+  date,
+}: EditProps) => {
+  const isEdit = useSetRecoilState(editState);
   const navigate = useNavigate();
 
-  const { routineId } = location.state || {};
   const quillRef = useRef<ReactQuill>(null);
 
   const [formDataBlog, setFormDataBlog] = useState<BlogForm>({
-    title: "",
-    content: "",
+    title: title,
+    content: content,
   });
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,9 +68,6 @@ const RoutineBlogDetailEditor = () => {
       const file = input.files?.[0];
       if (file) {
         setFormDataBlog((prev) => ({ ...prev, image: file }));
-        console.log(file);
-      } else {
-        console.log(2);
       }
     });
   }, []);
@@ -74,11 +85,11 @@ const RoutineBlogDetailEditor = () => {
         formDataWithImage.append("image", formDataBlog.image);
       }
 
-      const data = await postBlog(routineId, formDataWithImage);
+      const data = await patchBlog(routineId, contentId, formDataWithImage);
 
       if (data) {
-        const date = formatDateToISO(data.date);
-        navigate(`/routine/${routineId}/detail/${date}/${data.id}`);
+        isEdit(false);
+        navigate(`/routine/${routineId}/detail/${date}/${contentId}`);
       } else {
         console.error("이미지 전송 실패");
       }
@@ -146,6 +157,7 @@ const RoutineBlogDetailEditor = () => {
         <input
           onChange={onChangeTitle}
           placeholder="제목을 입력하세요."
+          value={formDataBlog.title}
           type="text"
           className="px-[3px] py-[20px] w-[95%] text-[30px] border-b border-[#d9d9d9] focus:outline-none"
         />
@@ -161,17 +173,17 @@ const RoutineBlogDetailEditor = () => {
       />
       <div className="absolute bg-white bottom-0 z-50 sticky shadow-2xl flex justify-between px-[15px] py-[15px]">
         <button onClick={onClickBackArrow} className="font-semibold">
-          &larr; 나가기
+          &larr; 취소하기
         </button>
         <button
           type="submit"
           className="font-semibold bg-[#3a7ce1] text-white px-4 py-2 rounded-[5px]"
         >
-          저장하기
+          수정하기
         </button>
       </div>
     </form>
   );
 };
 
-export default RoutineBlogDetailEditor;
+export default RoutineBlogDetailEditorEdit;

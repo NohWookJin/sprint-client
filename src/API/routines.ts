@@ -130,3 +130,65 @@ export const getRoutineTodoAll = async (
     return null;
   }
 };
+
+// 단일 블로그 루틴 조회
+export interface RoutineBlogData {
+  id: number;
+  userId?: number;
+  name: string;
+  date?: string;
+  routineType: string | null;
+  targetCount?: number;
+  colorSelection?: string;
+  today: Blog[];
+  past: { [date: string]: Blog[] };
+}
+
+export interface Blogs {
+  today: Blog[];
+  past: { [date: string]: Blog[] };
+}
+
+export interface Blog {
+  id: number;
+  title: string;
+  content: string;
+  date: string;
+}
+
+export const getRoutineBlog = async (routineId: number): Promise<Blogs> => {
+  const { data } = await instance.get(`/routines/${routineId}/blogs`);
+
+  return data;
+};
+
+export const getRoutineBlogAll = async (
+  routineId: number
+): Promise<RoutineBlogData | null> => {
+  try {
+    const categories = await getCategory();
+    const selectedCategory = categories.find(
+      (category) => category.id === routineId
+    );
+    if (!selectedCategory) return null;
+
+    const blogs = await getRoutineBlog(routineId);
+
+    const combinedData: RoutineBlogData = {
+      id: selectedCategory.id,
+      userId: selectedCategory.userId,
+      name: selectedCategory.name,
+      date: selectedCategory.date,
+      routineType: selectedCategory.routineType,
+      targetCount: selectedCategory.targetCount,
+      colorSelection: selectedCategory.colorSelection,
+      today: blogs.today,
+      past: blogs.past,
+    };
+
+    return combinedData;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
