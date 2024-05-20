@@ -33,16 +33,14 @@ const RoutineBlogDetailBlogItem = ({
 
   return (
     <div className="cursor-pointer shadow rounded-lg p-4 bg-[#F4F4F8]  min-h-[30px]">
-      <div className="flex justify-between items-center">
-        <span>{blog.title}</span>
-        <span
-          onClick={() =>
-            onClickTodayDetailBlog(blog.id, blog.title, blog.content)
-          }
-          className="text-[12px] opacity-[0.6]"
-        >
-          이동하기
-        </span>
+      <div
+        className="flex justify-between items-center"
+        onClick={() => {
+          onClickTodayDetailBlog(blog.id, blog.title, blog.content);
+        }}
+      >
+        <span className="font-bold">{blog.title}</span>
+        <span className="text-[12px] opacity-[0.6]">이동하기</span>
       </div>
     </div>
   );

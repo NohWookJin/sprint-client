@@ -37,9 +37,9 @@ const RoutineTodoDetailAnalysis = ({
     fetchData();
   }, [routineId, startDate]);
 
-  if (analysisData) {
-    console.log(analysisTable);
-  }
+  // if (analysisData) {
+  //   console.log(analysisTable);
+  // }
 
   if (analysisData) {
     return (
