@@ -1,4 +1,4 @@
-import type { CategoriesItem } from "../../API/getCategory";
+import type { CategoriesItem } from "../../API/routines";
 import { useNavigate } from "react-router-dom";
 
 interface CategoryItemProps {
@@ -12,7 +12,7 @@ const CategoryItem = ({
   selectedCategory,
   onClickCategory,
 }: CategoryItemProps) => {
-  const { name, routine_type, id } = item;
+  const { name, routineType } = item;
 
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const CategoryItem = ({
     if (item.id === 0) {
       navigate(`/`);
     } else {
-      navigate(`/routine/${item.id}`, { state: { routine_type, id } });
+      navigate(`/routine/${item.id}?routineType=${routineType}`);
     }
   };
 
@@ -29,7 +29,7 @@ const CategoryItem = ({
 
   return (
     <button
-      className={`max-w-[120px] truncate text-[18px] font-semibold ${isSelected}`}
+      className={`text-[16.5px] font-semibold ${isSelected}`}
       onClick={onClickedCategory}
     >
       {name}

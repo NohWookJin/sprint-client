@@ -1,57 +1,69 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import ColorType from "../../Dummy/assets/setColor.png";
-import ColorType2 from "../../Dummy/assets/setColor2.png";
-
-// 추후 인터페이스 api 이동
-interface FormProps {
-  routine_name: string;
-  routine_type: string;
-  routine_color_type: string;
-}
+import { RoutineDataForm, postNewRoutine } from "../../API/routines";
+import { useNavigate } from "react-router-dom";
 
 const NewRoutineForm = () => {
-  const [formData, setFormData] = useState<FormProps>({
-    routine_name: "",
-    routine_type: "",
-    routine_color_type: "",
+  const [formData, setFormData] = useState<RoutineDataForm>({
+    name: "",
+    routineType: "",
+    targetCount: 0,
+    colorSelection: "",
   });
+  const [isValidForm, setIsValidForm] = useState<boolean>(false);
 
-  const onSubmitForm = (e: FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const isValidateForm = (data: RoutineDataForm) => {
+    return (
+      data.name.trim().length > 1 &&
+      data.name.trim().length < 7 &&
+      data.routineType.trim().length > 0 &&
+      data.targetCount >= 1 &&
+      data.colorSelection.trim().length > 0
+    );
+  };
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      !formData.routine_name.trim() ||
-      !formData.routine_type.trim() ||
-      !formData.routine_color_type.trim()
-    ) {
-      alert("이름 혹은 선택을 모두 완료해주세요.");
-      return;
+    try {
+      const data = await postNewRoutine(formData);
+      navigate(`/routine/${data.id}?routineType=${formData.routineType}`);
+    } catch (error) {
+      console.log(error);
     }
-    alert("루틴 생성 완료. 추후 API 연결 예정...");
   };
 
-  const onChangeRoutineName = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, routine_name: e.target.value });
-  };
-
-  const onChangeRoutineType = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, routine_type: e.target.value });
-  };
-
-  const onChangeRoutineColorType = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, routine_color_type: e.target.value });
+  const onChangeField = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      const newFormData = {
+        ...prev,
+        [name]: value,
+      };
+      setIsValidForm(isValidateForm(newFormData));
+      return newFormData;
+    });
   };
 
   return (
-    <form onSubmit={onSubmitForm}>
+    <form onSubmit={onSubmit} className="pb-[40px]">
       <div className="flex flex-col pb-[80px]">
         <span className="pb-[10px] font-semibold text-[20px]">
           1. 새로운 루틴의 이름을 정해주세요.
         </span>
         <input
-          onChange={onChangeRoutineName}
+          onChange={onChangeField}
           className="focus:outline-none border-b border-[#d9d9d9] pt-[10px] pb-[10px]"
+          name="name"
           type="text"
         />
+        {formData.name.trim().length > 7 && (
+          <span className="pt-[10px] mb-[-10px] text-[13px] text-[#ff0000] opacity-[0.7]">
+            * 루틴의 이름은 최대 6글자만 가능합니다.
+          </span>
+        )}
       </div>
       <div className="flex flex-col gap-[15px] text-[20px] pb-[80px]">
         <span className="font-semibold">
@@ -61,23 +73,27 @@ const NewRoutineForm = () => {
           <label className="min-w-[300px] flex flex-col">
             <div>
               <input
-                onChange={onChangeRoutineType}
+                onChange={onChangeField}
                 name="routineType"
                 type="radio"
-                value="todolist"
+                value="todo"
               />
               <span className="pl-[10px] text-[16px] font-semibold">
                 투두리스트
               </span>
             </div>
-            <span className="text-[12px] pt-[3px] opacity-[0.6]">
-              예시 이미지 첨부 예정
-            </span>
+            <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
+              <img
+                className="object-contain"
+                src="/assets/todoType.png"
+                alt="routine-color-image"
+              />
+            </div>
           </label>
           <label className="min-w-[300px] flex flex-col">
             <div>
               <input
-                onChange={onChangeRoutineType}
+                onChange={onChangeField}
                 name="routineType"
                 type="radio"
                 value="blog"
@@ -86,22 +102,50 @@ const NewRoutineForm = () => {
                 블로그
               </span>
             </div>
-            <span className=" text-[12px] pt-[3px] opacity-[0.6]">
-              예시 이미지 첨부 예정
-            </span>
+            <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
+              <img
+                className="object-contain"
+                src="/assets/blogType.png"
+                alt="routine-color-image"
+              />
+            </div>
           </label>
         </div>
       </div>
+      <div className="flex flex-col pb-[80px]">
+        <span className="pb-[10px] font-semibold text-[20px]">
+          3. 루틴의 일일 목표 횟수를 정해주세요.
+        </span>
+        <span className="pb-[10px] text-[12px] opacity-[0.6]">
+          * 일일 목표 횟수를 달성해야 루틴의 기록(잔디)을 채울 수 있으니 신중히
+          선택해주세요.
+        </span>
+        <select
+          onChange={onChangeField}
+          name="targetCount"
+          value={formData.targetCount}
+          className="focus:outline-none bg-white appearance-none border-none pt-[10px] pb-[10px]"
+        >
+          <option value={0} disabled>
+            목표 횟수를 선택하세요
+          </option>
+          {[...Array(15).keys()].map((i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="flex flex-col gap-[15px] text-[20px] pb-[80px]">
         <span className="font-semibold text-[20px]">
-          3. 새로운 루틴의 잔디 색상을 정해주세요.
+          4. 새로운 루틴의 잔디 색상을 정해주세요.
         </span>
         <div className="flex items-center gap-[30px]">
           <label className="min-w-[300px] flex flex-col">
             <div>
               <input
-                onChange={onChangeRoutineColorType}
-                name="routineColorType"
+                onChange={onChangeField}
+                name="colorSelection"
                 type="radio"
                 value="#3a7ce1"
               />
@@ -112,32 +156,43 @@ const NewRoutineForm = () => {
             <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 className="object-contain"
-                src={ColorType}
+                src="/assets/setColor.png"
                 alt="routine-color-image"
               />
             </div>
           </label>
           <label className="min-w-[300px] flex flex-col">
-            <div>
+            <div className="relative cursor-not-allowed">
               <input
-                onChange={onChangeRoutineColorType}
-                name="routineColorType"
+                onChange={onChangeField}
+                name="colorSelection"
                 type="radio"
                 value="#30A14E"
+                disabled
               />
               <span className="pl-[10px]  text-[16px] font-semibold">녹색</span>
+              <div className="text-[11.5px] opacity-[0.6] absolute top-[8px] left-[60px]">
+                아직 지원하지 않고 있어요.
+              </div>
             </div>
-            <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
+            <div className="pt-[10px] cursor-pointer opacity-[0.5]">
               <img
                 className="object-contain"
-                src={ColorType2}
+                src="/assets/setColor2.png"
                 alt="routine-color-image"
               />
             </div>
           </label>
         </div>
       </div>
-      <button className="bg-[#3A7CE1] text-white w-full h-[45px] rounded-[6px]">
+      <button
+        className={`bg-[#3A7CE1] text-white w-full h-[45px] rounded-[6px] ${
+          isValidForm
+            ? "bg-[#3a7ce1] cursor-pointer"
+            : "bg-gray-400 cursor-not-allowed"
+        }`}
+        disabled={!isValidForm}
+      >
         생성하기
       </button>
     </form>

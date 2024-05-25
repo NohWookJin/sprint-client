@@ -1,7 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { getCookie, setCookieLogout } from "../../lib/userCookie";
 
 const Header = () => {
   const navigate = useNavigate();
+  const accessToken = getCookie("SP_AES");
+
+  const onClikcLogout = () => {
+    setCookieLogout("SP_AES");
+    setCookieLogout("SP_USER_EMAIL");
+    setCookieLogout("SP_USER_NAME");
+    navigate("/login");
+  };
 
   return (
     <header className="max-w-[640px] flex items-end justify-between py-[20px] mb-[5px]">
@@ -15,12 +24,28 @@ const Header = () => {
           </span>
         </div>
       </div>
-      <div className="flex justify-between gap-[10px] pb-[12px]">
+      <div className="flex justify-between items-center gap-[15px] pb-[12px]">
         {/* <span className="text-[14px]">후원하기</span> */}
-        {/* <span className="text-[14px]">내 정보</span> */}
-        <div onClick={() => navigate("/login")}>
-          <span className="text-[14px] cursor-pointer">로그인</span>
-        </div>
+        {accessToken && (
+          <div onClick={() => navigate("/routine/setting")}>
+            <span className="text-[13px] cursor-pointer opacity-[0.6]">
+              루틴 설정
+            </span>
+          </div>
+        )}
+        {accessToken ? (
+          <div onClick={onClikcLogout}>
+            <span className="text-[13px] cursor-pointer opacity-[0.6]">
+              로그아웃
+            </span>
+          </div>
+        ) : (
+          <div onClick={() => navigate("/login")}>
+            <span className="text-[13px] cursor-pointer opacity-[0.7]">
+              로그인
+            </span>
+          </div>
+        )}
       </div>
     </header>
   );

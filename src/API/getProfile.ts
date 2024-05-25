@@ -1,22 +1,20 @@
-import data from "../Dummy/Profile.json";
+import { instance } from "../lib/userAuth";
 
-export interface MainProfile {
-  response: MainProfileItems;
+export interface ProfileResponse {
+  id: number;
+  email: string;
+  name: string;
+  createdAt: string;
+  badges: string[];
+  level: string;
 }
 
-export interface MainProfileItems {
-  start_with: number;
-  badge: string[];
-}
+export const getProfile = async (): Promise<ProfileResponse> => {
+  try {
+    const { data } = await instance.get(`/user/info`);
 
-// export interface MainProfileItems {
-//     image: string;
-//     start_with: number;
-//     badge: string[];
-//   }
-
-export const getProfile = () => {
-  const res = data;
-
-  return res;
+    return data;
+  } catch (error) {
+    throw console.error(error);
+  }
 };

@@ -1,71 +1,107 @@
 import {
   ChangeEvent,
   FormEvent,
-  // useCallback,
+  useCallback,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
 import { formats } from "./QuillEditor";
 import "react-quill/dist/quill.snow.css";
 import "./QuillStlye.css";
+import { postBlog } from "../../API/routinesBlog";
+import { formatDateToISO } from "../../lib/timeFormatChange";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
-interface FormProps {
+interface BlogForm {
   title: string;
   content: string;
+  image?: File;
 }
 
 const RoutineBlogDetailEditor = () => {
+  const location = useLocation();
   const navigate = useNavigate();
 
+  const { routineId } = location.state || {};
   const quillRef = useRef<ReactQuill>(null);
 
-  const [formData, setFormData] = useState<FormProps>({
+  const [formDataBlog, setFormDataBlog] = useState<BlogForm>({
     title: "",
     content: "",
   });
 
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, title: e.target.value });
+    setFormDataBlog({ ...formDataBlog, title: e.target.value });
   };
 
   const onChangeContent = (content: string) => {
-    setFormData({ ...formData, content: content });
+    setFormDataBlog({ ...formDataBlog, content });
   };
 
-  // const imageHandler = useCallback(() => {
-  //   const input = document.createElement("input");
-  //   input.setAttribute("type", "file");
-  //   input.setAttribute("accept", "image/*");
-  //   input.click();
-  //   input.addEventListener("change", async () => {
-  //     const editor = quillRef.current?.getEditor();
-  //     if (!editor) return;
-
-  //     const file = input.files?.[0];
-  //     if (!file) return;
-
-  //   });
-  // }, []);
+  const imageHandler = useCallback(() => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.addEventListener("change", () => {
+      const file = input.files?.[0];
+      if (file) {
+        setFormDataBlog((prev) => ({ ...prev, image: file }));
+        console.log(file);
+      } else {
+        console.log(2);
+      }
+    });
+  }, []);
 
   const onClickBackArrow = () => {
     navigate(-1);
   };
 
+  const onSaveContent = async () => {
+    try {
+      const formDataWithImage = new FormData();
+      formDataWithImage.append("title", formDataBlog.title);
+      formDataWithImage.append("content", formDataBlog.content);
+      if (formDataBlog.image) {
+        formDataWithImage.append("image", formDataBlog.image);
+      }
+
+      const data = await postBlog(routineId, formDataWithImage);
+
+      if (data) {
+        const date = formatDateToISO(data.date);
+        const id = Number(data.id);
+        const title = data.title;
+        const content = data.content;
+        navigate(`/routine/${routineId}/detail/${date}/${id}`, {
+          state: { id, date, title, content },
+        });
+      } else {
+        navigate(-1);
+        console.error("이미지 전송 실패");
+      }
+    } catch (error) {
+      console.error("Error saving blog:", error);
+    }
+  };
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.title === "" || formData.content === "") {
+    if (
+      formDataBlog.title.trim() === "" ||
+      formDataBlog.content.trim() === ""
+    ) {
       alert("제목 또는 내용을 입력하세요.");
     } else {
-      alert("전송 성공...");
-      console.log(formData);
+      onSaveContent();
     }
   };
 
@@ -98,14 +134,14 @@ const RoutineBlogDetailEditor = () => {
             },
             { background: [] },
           ],
-          ["image"],
+          [{ image: imageHandler }],
         ],
         ImageResize: {
           parchment: Quill.import("parchment"),
         },
       },
     };
-  }, []);
+  }, [imageHandler]);
 
   return (
     <form
@@ -124,7 +160,7 @@ const RoutineBlogDetailEditor = () => {
         theme="snow"
         modules={modules}
         formats={formats}
-        value={formData.content || ""}
+        value={formDataBlog.content || ""}
         ref={quillRef}
         onChange={onChangeContent}
         placeholder="루틴을 시작해보세요..."
@@ -133,7 +169,10 @@ const RoutineBlogDetailEditor = () => {
         <button onClick={onClickBackArrow} className="font-semibold">
           &larr; 나가기
         </button>
-        <button className="font-semibold bg-[#3a7ce1] text-white px-4 py-2 rounded-[5px]">
+        <button
+          type="submit"
+          className="font-semibold bg-[#3a7ce1] text-white px-4 py-2 rounded-[5px]"
+        >
           저장하기
         </button>
       </div>

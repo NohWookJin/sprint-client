@@ -1,6 +1,6 @@
 import CategoryItem from "./CategoryItem";
 import { useEffect, useState } from "react";
-import { getCategory, Categories } from "../../API/getCategory";
+import { getCategory, Categories } from "../../API/routines";
 import { useParams, Link, useLocation } from "react-router-dom";
 
 const Category = () => {
@@ -16,30 +16,37 @@ const Category = () => {
   };
 
   useEffect(() => {
-    const data = getCategory();
+    const fetchData = async () => {
+      try {
+        const data = await getCategory();
+        if (data) setCategories(data);
 
-    if (data) setCategories(data);
-
-    if (params.id !== undefined) {
-      setSelectedCategory(Number(params.id));
-      if (location.pathname.includes("detail")) {
-        const splitSegments = location.pathname.split("/");
-        setSelectedCategory(Number(splitSegments[2]));
+        if (params.id !== undefined) {
+          setSelectedCategory(Number(params.id));
+          if (location.pathname.includes("detail")) {
+            const splitSegments = location.pathname.split("/");
+            setSelectedCategory(Number(splitSegments[2]));
+          }
+        }
+        if (params.id === undefined) {
+          setSelectedCategory(0);
+        }
+        if (params.id === undefined && location.pathname === "/routine/new") {
+          setSelectedCategory(null);
+          SetIsNewRoutine(true);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    }
-    if (params.id === undefined && location.pathname === "/routine/new") {
-      setSelectedCategory(null);
-      SetIsNewRoutine(true);
-    }
-    if (params.id === undefined && location.pathname !== "/routine/new")
-      setSelectedCategory(0);
+    };
+    fetchData();
   }, [params.id, location.pathname]);
 
   if (categories !== null) {
     return (
-      <section className="flex items-center justify-between  border-b border-[#d9d9d9] pb-[12px] mb-[50px]">
+      <section className="flex items-center justify-between border-b border-[#d9d9d9] pb-[12px] mb-[70px]">
         <div className="flex items-center gap-[30px]">
-          {categories.response.map((item) => (
+          {categories.map((item) => (
             <CategoryItem
               key={item.id}
               item={item}
@@ -48,15 +55,17 @@ const Category = () => {
             />
           ))}
         </div>
-        <Link to="/routine/new">
-          <button
-            className={`font-semibold text-[16px] ${
-              isNewRoutine ? "text-[#3a7ce1]" : ""
-            }`}
-          >
-            + 루틴 생성
-          </button>
-        </Link>
+        {categories.length <= 5 && (
+          <Link to="/routine/new">
+            <button
+              className={`font-semibold text-[16px] ${
+                isNewRoutine ? "text-[#3a7ce1]" : ""
+              }`}
+            >
+              + 루틴 생성
+            </button>
+          </Link>
+        )}
       </section>
     );
   }

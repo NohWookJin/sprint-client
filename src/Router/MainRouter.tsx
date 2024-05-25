@@ -7,6 +7,7 @@ import NewRoutinePage from "../Pages/Routine/new.page";
 import RoutinePage from "../Pages/Routine/routine.page";
 import RoutineDetailViewPage from "../Pages/RoutineDetail/routineDetailView.page.";
 import RoutineDetailPostPage from "../Pages/RoutineDetail/routineDetailPost.page";
+import SettingRoutinePage from "../Pages/Routine/setting.page";
 
 const MainRouter = () => {
   return (
@@ -23,6 +24,7 @@ const MainRouter = () => {
             path="/routine/:routineId/detail/:date/:id"
             element={<RoutineDetailViewPage />}
           />
+          <Route path="/routine/setting" element={<SettingRoutinePage />} />
         </Route>
       </Routes>
     </>

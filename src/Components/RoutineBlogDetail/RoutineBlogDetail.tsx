@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import RoutineBlogDetailBlog from "./RoutineBlogDetailBlog";
 import RoutineTodoDetailAnalysis from "../RotineTodoDetail/RoutineTodoDetailAnalysis";
 import RoutineBlogDetailPast from "./RoutineBlogDetailPast";
-
-import { getRoutineBlog, Response } from "../../API/getRoutineBlog";
+import { formatTodayDate } from "../../lib/timeFormatChange";
+import { RoutineBlogData, getRoutineBlogAll } from "../../API/routines";
 
 interface RoutineBlogDetailProps {
   routineId: number;
 }
 
 const RoutineBlogDetail = ({ routineId }: RoutineBlogDetailProps) => {
-  const [data, setData] = useState<Response | null>(null);
+  const [blogs, setBlogs] = useState<RoutineBlogData | null>(null);
+  const [todayDate, setTodayDate] = useState<string>("");
+  const [isBlogsChanged, setIsBlogsChanged] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -21,20 +22,30 @@ const RoutineBlogDetail = ({ routineId }: RoutineBlogDetailProps) => {
   };
 
   useEffect(() => {
-    const res = getRoutineBlog();
-    setData(res);
-    // getRoutineTodo(routineId);  추후 API
-  }, [routineId]);
+    const fetchData = async () => {
+      const data = await getRoutineBlogAll(routineId);
 
-  if (data) {
+      if (data) {
+        setBlogs(data);
+        setTodayDate(formatTodayDate());
+        setIsBlogsChanged(false);
+      }
+    };
+
+    if (isBlogsChanged) fetchData();
+
+    fetchData();
+  }, [isBlogsChanged, routineId]);
+
+  if (blogs) {
     return (
       <section>
         <h1 className="text-[28px] font-bold text-[#3A7CE1] pb-[5px]">
-          {data.name}
+          {blogs.name}
         </h1>
         <div className="pb-[20px] font-semibold text-[20px]">
           <div className="flex justify-between items-center">
-            <span>{data.date}, 오늘의 블로그</span>
+            <span>{todayDate} - 오늘의 블로그</span>
             <span
               onClick={onClickNewItem}
               className="text-[16px] cursor-pointer mt-[-3px]"
@@ -43,11 +54,14 @@ const RoutineBlogDetail = ({ routineId }: RoutineBlogDetailProps) => {
             </span>
           </div>
         </div>
-        <RoutineBlogDetailBlog blog={data.blog} routineId={routineId} />
-        <RoutineTodoDetailAnalysis name={data.name} analysis={data.analysis} />
+        <RoutineBlogDetailBlog blog={blogs.today} routineId={routineId} />
+        <RoutineTodoDetailAnalysis
+          routineId={routineId}
+          startDate={blogs.date as string}
+        />
         <RoutineBlogDetailPast
-          name={data.name}
-          past={data.past}
+          name={blogs.name}
+          past={blogs.past}
           routineId={routineId}
         />
       </section>

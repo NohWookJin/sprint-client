@@ -1,15 +1,41 @@
 import Category from "../Category/Category";
 import Profile from "../Profile/Profile";
 import MainTodayRoutine from "./MainTodayRoutine";
-import Analysis from "../Analysis/Analysis";
+import AnalysisBox from "../Analysis/AnalysisBox";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../../API/users";
+import { getCookie } from "../../lib/userCookie";
+import Hero from "../Landing/Hero";
+import Benefits from "../Landing/Benefits";
 
 const Main = () => {
+  const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
+
+  useEffect(() => {
+    const userLogined = getCookie("SP_AES");
+    if (userLogined) {
+      setIsUserLogined(true);
+      getUserInfo();
+    } else {
+      setIsUserLogined(false);
+    }
+  }, []);
+
   return (
     <>
-      <Category />
-      <Profile />
-      <MainTodayRoutine />
-      <Analysis />
+      {isUserLogined ? (
+        <section>
+          <Category />
+          <Profile />
+          <MainTodayRoutine />
+          <AnalysisBox />
+        </section>
+      ) : (
+        <section className="mb-[30px]">
+          <Hero />
+          <Benefits />
+        </section>
+      )}
     </>
   );
 };

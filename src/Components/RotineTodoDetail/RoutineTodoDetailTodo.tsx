@@ -1,19 +1,21 @@
 import { FormEvent, useState } from "react";
 import RoutineTodoDetailTodoItem from "./RoutineTodoDetailTodoItem";
-import type { Todo } from "../../API/getRoutineTodo";
+import type { Todo } from "../../API/routines";
 
 interface RoutineTodoDetailTodoProps {
-  todo: Todo[];
-  onToggleTodo: (id: number) => void;
+  todos: Todo[];
+  onToggleTodo: (id: number, completed: boolean) => void;
   onAddTodo: (content: string) => void;
   onEditTodo: (id: number, content: string) => void;
+  onDeleteTodo: (id: number) => void;
 }
 
 const RoutineTodoDetailTodo = ({
-  todo,
+  todos,
   onToggleTodo,
   onAddTodo,
   onEditTodo,
+  onDeleteTodo,
 }: RoutineTodoDetailTodoProps) => {
   const [newTodoContent, setNewTodoContent] = useState("");
 
@@ -24,17 +26,22 @@ const RoutineTodoDetailTodo = ({
   };
 
   return (
-    <div className="mb-[60px] bg-[#F4F4F8] w-full flex flex-col justify-between min-h-[180px] shadow-2xl rounded-lg p-4">
-      <div className="flex flex-col gap-[15px]">
-        {todo.map((todo) => (
-          <RoutineTodoDetailTodoItem
-            key={todo.id}
-            todo={todo}
-            onToggleTodo={onToggleTodo}
-            onEditTodo={onEditTodo}
-          />
-        ))}
-      </div>
+    <div className="mb-[60px] bg-[#F4F4F8] w-full flex flex-col justify-between shadow-2xl rounded-lg p-4">
+      {todos.length !== 0 && (
+        <div className="flex flex-col gap-[15px]">
+          {todos
+            .sort((a, b) => a.id - b.id)
+            .map((todo) => (
+              <RoutineTodoDetailTodoItem
+                key={todo.id}
+                todo={todo}
+                onToggleTodo={onToggleTodo}
+                onEditTodo={onEditTodo}
+                onDeleteTodo={onDeleteTodo}
+              />
+            ))}
+        </div>
+      )}
 
       <form onSubmit={onSubmitNewContent} className="mt-[20px]">
         <input
