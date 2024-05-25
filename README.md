@@ -1,30 +1,68 @@
-# React + TypeScript + Vite
+# SPRINT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+자기개발을 좋아하는 사람을 위한 루틴 관리 서비스 SPRINT입니다. 🏃
 
-Currently, two official plugins are available:
+👉 [서비스 링크](https://www.sprints.co.kr)에서 반복하는 루틴을 만들고 제공되는 분석을 통해 성장해보세요.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br /><br />
 
-## Expanding the ESLint configuration
+<div align="center">
+  🏃서비스 화면 
+  <p align="center">
+    <img src="https://github.com/NohWookJin/sprint-client/assets/101846817/710b6c93-1920-4ee8-b628-d248f48914ff" width="800" />
+  </p>
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<br /><br /><br /><br />
 
-- Configure the top-level `parserOptions` property like this:
+<div align="center">
+  🏃서비스 화면 
+  <p align="center">
+    <img src="https://github.com/NohWookJin/sprint-client/assets/101846817/45ae57b3-58ec-4ac7-83ca-420e388829d8" width="800" />
+  </p>
+</div>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+<br /><br />
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Using Service
+
+![Group 5](https://github.com/NohWookJin/sprint-client/assets/101846817/02f20890-0035-44e9-b73c-c86f6f819c95)
+
+![Group 1](https://github.com/NohWookJin/sprint-client/assets/101846817/a1ecd1a9-5f2a-4995-861c-9348825db3e4)
+
+![Group 2](https://github.com/NohWookJin/sprint-client/assets/101846817/0f26440b-522d-4721-8bcb-eceb842b9cc8)
+
+![Group 3](https://github.com/NohWookJin/sprint-client/assets/101846817/b386118e-3041-4984-b4e2-62bad12f554e)
+
+![Group 4](https://github.com/NohWookJin/sprint-client/assets/101846817/ee74fe0e-689c-4111-af11-6949a2746847)
+
+![Group 6](https://github.com/NohWookJin/sprint-client/assets/101846817/97503a96-0c46-4de4-bfbb-26741f2f2fc3)
+
+## Used Tech Stack
+
+<div style="display:flex;">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white">
+  <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat&logo=Recoil&logoColor=white">
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat&logo=Tailwind%20CSS&logoColor=white">
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=Vite&logoColor=white">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=Vercel&logoColor=white">
+</div>
+
+## Architecture
+
+SPRINT의 아키텍처는 다음과 같습니다.
+
+<img width="600" alt="아키텍처" src="https://github.com/NohWookJin/sprint-server/assets/101846817/7f462482-e178-4970-9de0-50d5aaa3f548">
+
+## Development
+
+1인 풀스택 개발 프로젝트입니다.
+
+- 2024년 03월 - 04월 : SPRINT 기획 및 와이어프레임
+- 2024년 04월 - 05월 : Clent, Server 개발
+- 2024년 06 - (진행중) : 보완 및 운영
+
+## Server
+
+👉 [서버 링크](https://www.sprints.co.kr)에서 SPRINT Server 코드를 확인하실 수 있습니다.
