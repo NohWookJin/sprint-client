@@ -1,11 +1,4 @@
 import Reveal from "./Reveal";
-import grow from "../../Assets/Landing/growImage.png";
-import wholeBlog from "../../Assets/Landing/blogWholeImage.png";
-import wholeTodo from "../../Assets/Landing/todoWholeImage.png";
-import analysis1 from "../../Assets/Landing/detailAnalysisImage.png";
-import analysis2 from "../../Assets/Landing/detailAnalysisImage2.png";
-import analysis3 from "../../Assets/Landing/MainAnalysisImage.png";
-import todayRoutineImage from "../../Assets/Landing/todayRoutineImage.png";
 
 const Benefits = () => {
   return (
@@ -28,7 +21,11 @@ const Benefits = () => {
         </Reveal>
         <Reveal>
           <div className="p-[15px] mt-[15px] border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
-            <img className="object-contain" src={grow} alt="grow-image" />
+            <img
+              className="object-contain"
+              src="/assets/Landing/growImage.png"
+              alt="grow-image"
+            />
           </div>
         </Reveal>
       </div>
@@ -51,14 +48,14 @@ const Benefits = () => {
             <div className="border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
               <img
                 className="w-[300px] p-[15px]"
-                src={wholeTodo}
+                src="/assets/Landing/todoWholeImage.png"
                 alt="whole-todo-image"
               />
             </div>
             <div className="border border-[1.5px] border-grey  rounded-[12px] overflow-hidden">
               <img
                 className="w-[300px] p-[15px]"
-                src={wholeBlog}
+                src="/assets/Landing/blogWholeImage.png"
                 alt="whole-blog-image"
               />
             </div>
@@ -82,15 +79,15 @@ const Benefits = () => {
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
                 className="w-[310px] p-[15px]"
-                src={analysis1}
-                alt="whole-todo-image"
+                src="/assets/Landing/detailAnalysisImage.png"
+                alt="detailAnalysisImage1"
               />
             </div>
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
                 className="w-[310px] p-[15px]"
-                src={analysis2}
-                alt="whole-blog-image"
+                src="/assets/Landing/detailAnalysisImage2.png"
+                alt="detailAnalysisImage2"
               />
             </div>
           </div>
@@ -105,8 +102,8 @@ const Benefits = () => {
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
                 className="w-[310px] p-[15px]"
-                src={analysis3}
-                alt="whole-todo-image"
+                src="/assets/Landing/MainAnalysisImage.png"
+                alt="MainAnalysisImage"
               />
             </div>
           </div>
@@ -131,8 +128,8 @@ const Benefits = () => {
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
                 className="w-[310px] p-[15px]"
-                src={todayRoutineImage}
-                alt="whole-todo-image"
+                src="/assets/Landing/todayRoutineImage.png"
+                alt="todayRoutineImage"
               />
             </div>
           </div>

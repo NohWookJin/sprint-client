@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import { getProfile, ProfileResponse } from "../../API/getProfile";
 import { onChangeBadge } from "../../lib/changeBadgeColor";
 import { calculateDaysSinceCreated } from "../../lib/timeFormatChange";
-import LV1 from "../../Assets/level1.png";
-import LV2 from "../../Assets/level2.png";
-import LV3 from "../../Assets/level3.png";
-import LV4 from "../../Assets/level4.png";
 
 const badgeDescriptions: { [key: string]: string } = {
   WELCOME: "🎉 웰컴 뱃지",
@@ -21,22 +17,22 @@ const badgeDescriptions: { [key: string]: string } = {
 
 const Profile = () => {
   const [profile, setProfile] = useState<ProfileResponse | null>(null);
-  const [userLevel, setUserLevel] = useState(LV1);
+  const [userLevel, setUserLevel] = useState("/Assets/level1.png");
   const [loading, setLoading] = useState(true);
   const [hoveredBadge, setHoveredBadge] = useState<string | null>(null);
 
   const onChangeProfile = (user_level: string) => {
     switch (user_level) {
       case "lv1":
-        return LV1;
+        return "/assets/level1.png";
       case "lv2":
-        return LV2;
+        return "/assets/level2.png";
       case "lv3":
-        return LV3;
+        return "/assets/level3.png";
       case "lv4":
-        return LV4;
+        return "/assets/level4.png";
       default:
-        return LV1;
+        return "/assets/level1.png";
     }
   };
 

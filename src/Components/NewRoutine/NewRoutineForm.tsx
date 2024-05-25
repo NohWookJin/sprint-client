@@ -1,9 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { RoutineDataForm, postNewRoutine } from "../../API/routines";
-import RoutineType1 from "../../Assets/todoType.png";
-import RoutineType2 from "../../Assets/blogType.png";
-import ColorType from "../../Assets/setColor.png";
-import ColorType2 from "../../Assets/setColor2.png";
 import { useNavigate } from "react-router-dom";
 
 const NewRoutineForm = () => {
@@ -89,7 +85,7 @@ const NewRoutineForm = () => {
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 className="object-contain"
-                src={RoutineType1}
+                src="/assets/todoType.png"
                 alt="routine-color-image"
               />
             </div>
@@ -109,7 +105,7 @@ const NewRoutineForm = () => {
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 className="object-contain"
-                src={RoutineType2}
+                src="/assets/blogType.png"
                 alt="routine-color-image"
               />
             </div>
@@ -160,7 +156,7 @@ const NewRoutineForm = () => {
             <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 className="object-contain"
-                src={ColorType}
+                src="/assets/setColor.png"
                 alt="routine-color-image"
               />
             </div>
@@ -182,7 +178,7 @@ const NewRoutineForm = () => {
             <div className="pt-[10px] cursor-pointer opacity-[0.5]">
               <img
                 className="object-contain"
-                src={ColorType2}
+                src="/assets/setColor2.png"
                 alt="routine-color-image"
               />
             </div>
