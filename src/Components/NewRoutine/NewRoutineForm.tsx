@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { RoutineDataForm, postNewRoutine } from "../../API/routines";
-import RoutineType from "../../Assets/todoType.png";
+import RoutineType1 from "../../Assets/todoType.png";
 import RoutineType2 from "../../Assets/blogType.png";
 import ColorType from "../../Assets/setColor.png";
 import ColorType2 from "../../Assets/setColor2.png";
@@ -89,7 +89,7 @@ const NewRoutineForm = () => {
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 className="object-contain"
-                src={RoutineType}
+                src={RoutineType1}
                 alt="routine-color-image"
               />
             </div>
