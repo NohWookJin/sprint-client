@@ -1,7 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { RoutineDataForm, postNewRoutine } from "../../API/routines";
-import ColorType from "../../Dummy/assets/setColor.png";
-import ColorType2 from "../../Dummy/assets/setColor2.png";
+import RoutineType from "../../Assets/todoType.png";
+import RoutineType2 from "../../Assets/blogType.png";
+import ColorType from "../../Assets/setColor.png";
+import ColorType2 from "../../Assets/setColor2.png";
 import { useNavigate } from "react-router-dom";
 
 const NewRoutineForm = () => {
@@ -29,9 +31,7 @@ const NewRoutineForm = () => {
     e.preventDefault();
     try {
       const data = await postNewRoutine(formData);
-      navigate(`/routine/${data.id}`, {
-        state: { id: data.id, routineType: formData.routineType },
-      });
+      navigate(`/routine/${data.id}?routineType=${formData.routineType}`);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +52,7 @@ const NewRoutineForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="pb-[40px]">
       <div className="flex flex-col pb-[80px]">
         <span className="pb-[10px] font-semibold text-[20px]">
           1. 새로운 루틴의 이름을 정해주세요.
@@ -86,9 +86,13 @@ const NewRoutineForm = () => {
                 투두리스트
               </span>
             </div>
-            <span className="text-[12px] pt-[3px] opacity-[0.6]">
-              예시 이미지 첨부 예정
-            </span>
+            <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
+              <img
+                className="object-contain"
+                src={RoutineType}
+                alt="routine-color-image"
+              />
+            </div>
           </label>
           <label className="min-w-[300px] flex flex-col">
             <div>
@@ -102,15 +106,23 @@ const NewRoutineForm = () => {
                 블로그
               </span>
             </div>
-            <span className=" text-[12px] pt-[3px] opacity-[0.6]">
-              예시 이미지 첨부 예정
-            </span>
+            <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
+              <img
+                className="object-contain"
+                src={RoutineType2}
+                alt="routine-color-image"
+              />
+            </div>
           </label>
         </div>
       </div>
       <div className="flex flex-col pb-[80px]">
         <span className="pb-[10px] font-semibold text-[20px]">
           3. 루틴의 일일 목표 횟수를 정해주세요.
+        </span>
+        <span className="pb-[10px] text-[12px] opacity-[0.6]">
+          * 일일 목표 횟수를 달성해야 루틴의 기록(잔디)을 채울 수 있으니 신중히
+          선택해주세요.
         </span>
         <select
           onChange={onChangeField}
@@ -154,16 +166,20 @@ const NewRoutineForm = () => {
             </div>
           </label>
           <label className="min-w-[300px] flex flex-col">
-            <div>
+            <div className="relative cursor-not-allowed">
               <input
                 onChange={onChangeField}
                 name="colorSelection"
                 type="radio"
                 value="#30A14E"
+                disabled
               />
               <span className="pl-[10px]  text-[16px] font-semibold">녹색</span>
+              <div className="text-[11.5px] opacity-[0.6] absolute top-[8px] left-[60px]">
+                아직 지원하지 않고 있어요.
+              </div>
             </div>
-            <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
+            <div className="pt-[10px] cursor-pointer opacity-[0.5]">
               <img
                 className="object-contain"
                 src={ColorType2}

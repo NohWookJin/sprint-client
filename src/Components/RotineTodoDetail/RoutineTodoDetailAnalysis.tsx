@@ -18,6 +18,8 @@ const RoutineTodoDetailAnalysis = ({
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAnalysis(routineId);
+      console.log(res);
+
       if (res) {
         setAnalysisData({
           ...res,
@@ -37,10 +39,6 @@ const RoutineTodoDetailAnalysis = ({
     fetchData();
   }, [routineId, startDate]);
 
-  // if (analysisData) {
-  //   console.log(analysisTable);
-  // }
-
   if (analysisData) {
     return (
       <div className="mb-[60px] mt-[80px]">
@@ -49,13 +47,13 @@ const RoutineTodoDetailAnalysis = ({
         </h1>
         <div className="pt-[20px] flex flex-col gap-[3px]">
           <span>
-            최초 스프린트 :
+            🤔 최초 스프린트 :
             <span className="pl-[5px] text-[#3a7ce1] font-semibold">
               {analysisData.date}
             </span>
           </span>
           <span>
-            현재 스프린트 :
+            🏃 현재 스프린트 :
             <span className="pl-[5px] text-[#3a7ce1] font-semibold">
               {analysisData.continuity}KM
             </span>
@@ -67,13 +65,13 @@ const RoutineTodoDetailAnalysis = ({
           </div>
           <div className="flex flex-col gap-[3px]">
             <span>
-              평균 스프린트 :
+              🎯 평균 스프린트 :
               <span className="pl-[5px] text-[#3a7ce1] font-semibold">
                 {analysisData.average}%
               </span>
             </span>
             <span>
-              일일 목표 횟수 :
+              👀 일일 목표 횟수 :
               <span className="pl-[5px] text-[#3a7ce1] font-semibold">
                 {analysisData.targetCount}
               </span>

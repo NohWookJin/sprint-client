@@ -1,4 +1,3 @@
-// 회원가입, 로그인 API
 import { instance } from "../lib/userAuth";
 import {
   getCookie,
@@ -6,7 +5,6 @@ import {
   setCookieUserInfo,
 } from "../lib/userCookie";
 
-// 회원가입
 export interface RequestSignup {
   signUpformData: SignupForm;
 }
@@ -25,7 +23,6 @@ export const signUp = async (
   return res.data;
 };
 
-// 로그인
 export interface LoginDataForm {
   email: string;
   password: string;
@@ -41,7 +38,6 @@ export const login = async (form: LoginDataForm) => {
   return data;
 };
 
-// 사용자 조회
 interface ResponseUserInfo {
   email: string;
   name: string;

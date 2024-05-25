@@ -44,7 +44,7 @@ const Category = () => {
 
   if (categories !== null) {
     return (
-      <section className="flex items-center justify-between border-b border-[#d9d9d9] pb-[12px] mb-[50px]">
+      <section className="flex items-center justify-between border-b border-[#d9d9d9] pb-[12px] mb-[70px]">
         <div className="flex items-center gap-[30px]">
           {categories.map((item) => (
             <CategoryItem

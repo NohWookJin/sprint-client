@@ -1,77 +1,87 @@
-// import React from "react";
-// import { ActivityCalendarEntry } from "../../API/getAnalysis";
+import { useEffect, useState } from "react";
+import { Analysis } from "../../API/getAnalysis";
+import RoutineDetailAnalysisItem from "./RoutineDetailAnalysisItem";
+import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../lib/timeFormatChange";
+import moment from "moment";
 
-// interface AnalysisItemProps {
-//   calendar: ActivityCalendarEntry;
-//   name?: string;
-//   start_with?: string;
-//   continuity?: number;
-// }
+interface AnalysisItemProps {
+  item: Analysis;
+}
 
-// const groupByWeek = (calendar: Record<string, boolean>) => {
-//   const weeks: Record<string, boolean>[] = [];
-//   let week: Record<string, boolean> = {};
-//   let currentWeekDay = new Date(Object.keys(calendar)[0]).getDay();
+const AnalysisItem = ({ item }: AnalysisItemProps) => {
+  const {
+    name,
+    routineId,
+    continuity,
+    average,
+    dailyCounts,
+    targetCount,
+    date,
+  } = item;
+  const [analysisTable, setAnalysisTable] = useState<number[]>([]);
+  const [newDate, setNewDate] = useState<string>(date);
 
-//   Object.entries(calendar).forEach(([date, didActivity], index) => {
-//     week[date] = didActivity;
-//     currentWeekDay++;
+  const naivgate = useNavigate();
 
-//     if (
-//       currentWeekDay % 7 === 0 ||
-//       index === Object.keys(calendar).length - 1
-//     ) {
-//       weeks.push(week);
-//       week = {};
-//     }
-//   });
+  useEffect(() => {
+    const parsedCounts = JSON.parse(dailyCounts);
+    if (parsedCounts && parsedCounts.length >= 365) {
+      const changedCounnts = parsedCounts.slice(0, 364);
+      setAnalysisTable(changedCounnts);
+      setNewDate(moment(date).toISOString());
+    } else {
+      setAnalysisTable(parsedCounts);
+    }
+  }, [dailyCounts, date]);
 
-//   return weeks;
-// };
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
+        <div
+          onClick={() => naivgate(`/routine/${routineId}`)}
+          className="cursor-pointer w-full text-lg font-semibold text-white rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 shadow-lg py-2 px-4 transform"
+        >
+          {name}
+        </div>
+        <div className="flex flex-col pt-[10px]">
+          <div>
+            <span className="text-[13px]">
+              🤔 {""}
+              <span className="text-[#3a7ce1] font-bold">
+                {formatDate(newDate)}
+              </span>
+              에 루틴을 시작했어요.
+            </span>
+          </div>
+          <div>
+            <span className="text-[13px]">
+              🏃 쉬지 않고 {""}
+              <span className="text-[#3a7ce1] font-bold">
+                {continuity}KM
+              </span>{" "}
+              달리고 있어요.
+            </span>
+          </div>
+          <div>
+            <span className="text-[13px]">
+              🎯 {name} 루틴은 최초 스프린트부터 현재까지{" "}
+              <span className="text-[#3a7ce1] font-bold">평균 {average}%</span>
+              를 달성하고 있어요.
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1 mb-[20px]">
+            <div className="flex flex-col gap-5 mt-5">
+              <RoutineDetailAnalysisItem
+                calendar={analysisTable}
+                targetCount={targetCount}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// const AnalysisItem: React.FC<AnalysisItemProps> = ({
-//   calendar,
-//   name,
-//   start_with,
-//   continuity,
-// }) => {
-//   return (
-//     <div className="flex flex-col gap-4 mb-[20px]">
-//       <div className="flex flex-col">
-//         <div className="w-full text-lg font-semibold text-white rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 shadow-lg py-2 px-4 transform">
-//           {name}
-//         </div>
-//         <div className="flex flex-col pt-[10px]">
-//           <div>
-//             <span className="text-[13px] opacity-[0.6]">
-//               * {start_with}에 {name} 루틴을 시작했어요.
-//             </span>
-//           </div>
-//           <div>
-//             <span className="text-[13px] opacity-[0.6]">
-//               * {continuity}KM 달리고 있어요.
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="flex">
-//         {groupByWeek(calendar).map((week, weekIndex) => (
-//           <div key={weekIndex} className="flex flex-col gap-[1px]">
-//             {Object.entries(week).map(([date, didActivity]) => (
-//               <div
-//                 key={date}
-//                 title={date}
-//                 className={`w-[11px] h-[12px] ${
-//                   didActivity ? "bg-[#3A7CE1] opacity-[0.95]" : "bg-gray-200"
-//                 } rounded-[3px] mr-[1px]`}
-//               ></div>
-//             ))}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AnalysisItem;
+export default AnalysisItem;

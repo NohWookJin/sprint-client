@@ -22,3 +22,10 @@ export const formatDateToISO = (time: string): string => {
   const setRealTime = moment(time).tz("Asia/Seoul");
   return setRealTime.format("YYYY-MM-DD");
 };
+
+export const calculateDaysSinceCreated = (createdAt: string): number => {
+  const createdDate = moment.tz(createdAt, "Asia/Seoul").startOf("day");
+  const currentDate = moment.tz("Asia/Seoul").startOf("day");
+
+  return currentDate.diff(createdDate, "days") + 1;
+};

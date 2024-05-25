@@ -28,7 +28,7 @@ interface BlogForm {
 
 interface EditProps {
   routineId: number;
-  contentId: number;
+  id: number;
   title: string;
   content: string;
   date: string;
@@ -36,12 +36,14 @@ interface EditProps {
 
 const RoutineBlogDetailEditorEdit = ({
   routineId,
-  contentId,
+  id,
   title,
   content,
   date,
 }: EditProps) => {
-  const isEdit = useSetRecoilState(editState);
+  console.log(routineId, id, title, content, date);
+
+  const setIsEdit = useSetRecoilState(editState);
   const navigate = useNavigate();
 
   const quillRef = useRef<ReactQuill>(null);
@@ -85,12 +87,17 @@ const RoutineBlogDetailEditorEdit = ({
         formDataWithImage.append("image", formDataBlog.image);
       }
 
-      const data = await patchBlog(routineId, contentId, formDataWithImage);
+      const data = await patchBlog(routineId, Number(id), formDataWithImage);
 
       if (data) {
-        isEdit(false);
-        navigate(`/routine/${routineId}/detail/${date}/${contentId}`);
+        navigate(-1);
+        setIsEdit(false);
+        navigate(`/routine/${routineId}/detail/${date}/${Number(id)}`, {
+          state: { id, date, title, content },
+        });
       } else {
+        navigate(-1);
+        setIsEdit(false);
         console.error("이미지 전송 실패");
       }
     } catch (error) {

@@ -78,8 +78,14 @@ const RoutineBlogDetailEditor = () => {
 
       if (data) {
         const date = formatDateToISO(data.date);
-        navigate(`/routine/${routineId}/detail/${date}/${data.id}`);
+        const id = Number(data.id);
+        const title = data.title;
+        const content = data.content;
+        navigate(`/routine/${routineId}/detail/${date}/${id}`, {
+          state: { id, date, title, content },
+        });
       } else {
+        navigate(-1);
         console.error("이미지 전송 실패");
       }
     } catch (error) {
