@@ -8,10 +8,19 @@ export interface Analysis {
   average: number;
   dailyCounts: string;
   startWith: string;
+  routineId: number;
 }
 
 export const getAnalysis = async (routineId: number): Promise<Analysis> => {
   const { data } = await instance.get(`/analysis/${routineId}`);
+
+  // console.log("data api: ", data);
+
+  return data;
+};
+
+export const getAnalysisAll = async (): Promise<Analysis[]> => {
+  const { data } = await instance.get(`/analysis/all`);
 
   return data;
 };

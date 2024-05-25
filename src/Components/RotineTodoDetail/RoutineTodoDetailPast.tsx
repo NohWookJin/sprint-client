@@ -4,14 +4,19 @@ import { Past, Todo } from "../../API/getRoutineTodo";
 interface RoutineTodoDetailPastProps {
   name: string;
   past: Past;
+  targetCount: number;
 }
 
-const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
+const RoutineTodoDetailPast = ({
+  past,
+  name,
+  targetCount,
+}: RoutineTodoDetailPastProps) => {
   const sortedPast: { [date: string]: Todo[] } = Object.entries(past)
     .sort(([dateA], [dateB]) => (dateA > dateB ? -1 : 1))
     .reduce((acc: { [date: string]: Todo[] }, [date, todos]) => {
       const newDate = new Date(date);
-      newDate.setDate(newDate.getDate() + 1);
+      newDate.setDate(newDate.getDate());
       const newDateString = newDate.toISOString().split("T")[0];
       acc[newDateString] = todos;
       return acc;
@@ -29,7 +34,7 @@ const RoutineTodoDetailPast = ({ past, name }: RoutineTodoDetailPastProps) => {
   };
 
   const isAllCompleted = (todos: Todo[]) =>
-    todos.every((todo) => todo.completed);
+    todos.filter((todo) => todo.completed).length >= targetCount;
 
   return (
     <section className="pb-[60px]">

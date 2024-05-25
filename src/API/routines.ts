@@ -1,6 +1,5 @@
 import { instance } from "./../lib/userAuth";
 
-// 전체 루틴 조회
 export type Categories = CategoriesItem[];
 
 export interface CategoriesItem {
@@ -29,7 +28,6 @@ export const getCategory = async (): Promise<Categories> => {
   return data;
 };
 
-// 루틴 생성
 export interface RoutineDataForm {
   name: string;
   routineType: string;
@@ -47,7 +45,6 @@ export const postNewRoutine = async (form: RoutineDataForm) => {
   }
 };
 
-// 루틴 이름 수정
 export const patchRoutineName = async (routineId: number, name: string) => {
   try {
     const { data } = await instance.patch(`/routine/${routineId}`, { name });
@@ -58,7 +55,6 @@ export const patchRoutineName = async (routineId: number, name: string) => {
   }
 };
 
-// 루틴 삭제
 export const deleteRoutine = async (routineId: number) => {
   try {
     const { data } = await instance.delete(`/routine/${routineId}`);
@@ -69,7 +65,6 @@ export const deleteRoutine = async (routineId: number) => {
   }
 };
 
-// 단일 투두 루틴 조회
 export interface RoutineData {
   id: number;
   userId?: number;
@@ -131,7 +126,6 @@ export const getRoutineTodoAll = async (
   }
 };
 
-// 단일 블로그 루틴 조회
 export interface RoutineBlogData {
   id: number;
   userId?: number;

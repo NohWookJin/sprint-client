@@ -28,20 +28,20 @@ const Header = () => {
         {/* <span className="text-[14px]">후원하기</span> */}
         {accessToken && (
           <div onClick={() => navigate("/routine/setting")}>
-            <span className="text-[14px] cursor-pointer opacity-[0.6]">
+            <span className="text-[13px] cursor-pointer opacity-[0.6]">
               루틴 설정
             </span>
           </div>
         )}
         {accessToken ? (
           <div onClick={onClikcLogout}>
-            <span className="text-[14px] cursor-pointer opacity-[0.6]">
+            <span className="text-[13px] cursor-pointer opacity-[0.6]">
               로그아웃
             </span>
           </div>
         ) : (
           <div onClick={() => navigate("/login")}>
-            <span className="text-[14px] cursor-pointer opacity-[0.7]">
+            <span className="text-[13px] cursor-pointer opacity-[0.7]">
               로그인
             </span>
           </div>

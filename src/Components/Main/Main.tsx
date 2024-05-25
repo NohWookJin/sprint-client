@@ -1,10 +1,12 @@
 import Category from "../Category/Category";
 import Profile from "../Profile/Profile";
 import MainTodayRoutine from "./MainTodayRoutine";
-// import Analysis from "../Analysis/Analysis";
+import AnalysisBox from "../Analysis/AnalysisBox";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../../API/users";
 import { getCookie } from "../../lib/userCookie";
+import Hero from "../Landing/Hero";
+import Benefits from "../Landing/Benefits";
 
 const Main = () => {
   const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
@@ -22,16 +24,17 @@ const Main = () => {
   return (
     <>
       {isUserLogined ? (
-        <>
+        <section>
           <Category />
           <Profile />
           <MainTodayRoutine />
-          {/* <Analysis /> */}
-        </>
+          <AnalysisBox />
+        </section>
       ) : (
-        <>
-          <span>첫 방문 페이지(비로그인) : 애니메이션</span>
-        </>
+        <section className="mb-[30px]">
+          <Hero />
+          <Benefits />
+        </section>
       )}
     </>
   );

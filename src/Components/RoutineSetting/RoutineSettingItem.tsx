@@ -57,7 +57,7 @@ const RoutineSettingItem = ({
 
   return (
     <div className="border rounded-[6px] py-[15px] px-[10px] flex items-center justify-between">
-      <div className="flex items-center gap-[10px]">
+      <div className="flex items-center gap-[6px]">
         <div className={`w-[10px] h-[10px] bg-[${colorSelection}]`}></div>
         {isEdit ? (
           <form onSubmit={onSubmit}>

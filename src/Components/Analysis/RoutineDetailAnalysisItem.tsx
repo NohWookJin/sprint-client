@@ -16,7 +16,7 @@ const RoutineDetailAnalysisItem: React.FC<AnalysisItemProps> = ({
           key={index}
           className={`w-[11px] h-[12px] ${
             didActivity >= targetCount
-              ? "bg-[#3A7CE1] opacity-[0.95]"
+              ? `bg-[#3A7CE1] opacity-[0.95]`
               : "bg-gray-200"
           } rounded-[3px]`}
         ></div>

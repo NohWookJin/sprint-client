@@ -77,7 +77,11 @@ const RoutineTodoDetail = ({ routineId }: RoutineTodoDetailProps) => {
           routineId={routineId}
           startDate={todos.date as string}
         />
-        <RoutineTodoDetailPast name={todos.name} past={todos.past} />
+        <RoutineTodoDetailPast
+          name={todos.name}
+          past={todos.past}
+          targetCount={todos.targetCount as number}
+        />
       </section>
     );
   }

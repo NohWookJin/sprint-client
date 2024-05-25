@@ -3,6 +3,8 @@ import { useRecoilState } from "recoil";
 import { editState } from "../../Store/editState";
 import RoutineBlogDetailEditorEdit from "./RoutineBlogDetailEditorEdit";
 import { deleteBlog } from "../../API/routinesBlog";
+import { useEffect, useState } from "react";
+import { BlogDetail, getRoutineBlogDetail } from "../../API/getRoutineBlog";
 
 interface RoutineBlogDetailViewProps {
   id: number;
@@ -11,12 +13,8 @@ interface RoutineBlogDetailViewProps {
   date: string;
 }
 
-const RoutineBlogDetailView = ({
-  title,
-  content,
-  date,
-  id,
-}: RoutineBlogDetailViewProps) => {
+const RoutineBlogDetailView = ({ id, date }: RoutineBlogDetailViewProps) => {
+  const [blogDetail, setBlogDetail] = useState<BlogDetail | null>(null);
   const [isEdit, setIsEdit] = useRecoilState(editState);
 
   const { routineId } = useParams();
@@ -33,15 +31,25 @@ const RoutineBlogDetailView = ({
     if (res) naviage(-1);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getRoutineBlogDetail(ROUTINE_ID, id);
+
+      if (res) setBlogDetail(res.blog);
+    };
+
+    fetchData();
+  }, [ROUTINE_ID, id, isEdit]);
+
   return (
     <section>
-      {isEdit ? (
+      {isEdit && blogDetail ? (
         <>
           <RoutineBlogDetailEditorEdit
             routineId={ROUTINE_ID}
-            contentId={id}
-            title={title}
-            content={content}
+            id={blogDetail.id}
+            title={blogDetail.title}
+            content={blogDetail.content}
             date={date}
           />
         </>
@@ -49,7 +57,9 @@ const RoutineBlogDetailView = ({
         <>
           <div className="flex flex-col gap-[10px]">
             <div className="flex items-center justify-between">
-              <h1 className="font-semibold text-[34px]">{title}</h1>
+              <h1 className="font-semibold text-[34px]">
+                {blogDetail?.title as string}
+              </h1>
               <div className="flex items-center gap-[7px] opacity-[0.6]">
                 <span
                   className="text-[14px] cursor-pointer"
@@ -69,7 +79,7 @@ const RoutineBlogDetailView = ({
           </div>
           <div
             className="mt-[50px] pb-[100px]"
-            dangerouslySetInnerHTML={{ __html: content }}
+            dangerouslySetInnerHTML={{ __html: blogDetail?.content as string }}
           />
         </>
       )}

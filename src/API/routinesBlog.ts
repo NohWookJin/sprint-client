@@ -1,6 +1,5 @@
 import { instance } from "./../lib/userAuth";
 
-// 블로그 생성
 export const postBlog = async (routineId: number, formData: FormData) => {
   try {
     const { data } = await instance.post(
@@ -19,7 +18,6 @@ export const postBlog = async (routineId: number, formData: FormData) => {
   }
 };
 
-// 블로그 수정
 export const patchBlog = async (
   routineId: number,
   contentId: number,
@@ -42,7 +40,6 @@ export const patchBlog = async (
   }
 };
 
-// 블로그 삭제
 export const deleteBlog = async (routineId: number, contentId: number) => {
   try {
     const res = await instance.delete(
