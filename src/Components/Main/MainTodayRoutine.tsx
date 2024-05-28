@@ -17,8 +17,6 @@ const MainTodayRoutine = () => {
     const fetchData = async () => {
       const res = await getCombinedData();
 
-      console.log(res);
-
       if (res) {
         setCombinedData(res);
       }
@@ -28,11 +26,17 @@ const MainTodayRoutine = () => {
 
   const getTodayTargetCount = (item: Routine & Analysis) => {
     const startDate = new Date(item.date);
+    startDate.setHours(0, 0, 0, 0);
+
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     const diffDays = Math.floor(
       (today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
     );
+
     const dailyCounts = JSON.parse(item.dailyCounts);
+
     return item.targetCount - (dailyCounts[diffDays] || 0);
   };
 

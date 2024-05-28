@@ -54,9 +54,6 @@ const RoutineBlogDetailEditor = () => {
       const file = input.files?.[0];
       if (file) {
         setFormDataBlog((prev) => ({ ...prev, image: file }));
-        console.log(file);
-      } else {
-        console.log(2);
       }
     });
   }, []);

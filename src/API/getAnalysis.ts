@@ -14,8 +14,6 @@ export interface Analysis {
 export const getAnalysis = async (routineId: number): Promise<Analysis> => {
   const { data } = await instance.get(`/analysis/${routineId}`);
 
-  // console.log("data api: ", data);
-
   return data;
 };
 

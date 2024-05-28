@@ -14,8 +14,6 @@ const MainTodayRoutineItem = ({
 }: MainTodayRoutineItemProps) => {
   const { name, count, id, routineType } = item;
 
-  console.log(name, "count: ", count);
-
   const onClickItem = () => {
     window.location.href = `/routine/${id}?routineType=${routineType}`;
   };
