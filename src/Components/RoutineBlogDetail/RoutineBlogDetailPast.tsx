@@ -16,7 +16,7 @@ const RoutineBlogDetailPast = ({
     .sort(([dateA], [dateB]) => (dateA > dateB ? -1 : 1))
     .reduce((acc: { [date: string]: Blog[] }, [date, todos]) => {
       const newDate = new Date(date);
-      newDate.setDate(newDate.getDate());
+      newDate.setDate(newDate.getDate() + 1);
       const newDateString = newDate.toISOString().split("T")[0];
       acc[newDateString] = todos;
       return acc;

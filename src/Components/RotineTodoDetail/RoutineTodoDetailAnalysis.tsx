@@ -18,7 +18,6 @@ const RoutineTodoDetailAnalysis = ({
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAnalysis(routineId);
-      console.log(res);
 
       if (res) {
         setAnalysisData({

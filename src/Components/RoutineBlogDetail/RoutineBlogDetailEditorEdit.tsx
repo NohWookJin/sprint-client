@@ -41,8 +41,6 @@ const RoutineBlogDetailEditorEdit = ({
   content,
   date,
 }: EditProps) => {
-  console.log(routineId, id, title, content, date);
-
   const setIsEdit = useSetRecoilState(editState);
   const navigate = useNavigate();
 

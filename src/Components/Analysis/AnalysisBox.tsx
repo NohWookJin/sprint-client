@@ -13,7 +13,6 @@ const AnalysiBox = () => {
       const res = await getAnalysisAll();
 
       if (res) setAnalysisData(res);
-      console.log(res);
     };
 
     fetchData();
