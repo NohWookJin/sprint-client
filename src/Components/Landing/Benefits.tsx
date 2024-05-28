@@ -22,6 +22,7 @@ const Benefits = () => {
         <Reveal>
           <div className="p-[15px] mt-[15px] border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
             <img
+              fetchPriority="high"
               className="object-contain"
               src="/assets/Landing/growImage.png"
               alt="grow-image"
@@ -47,6 +48,7 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
               <img
+                fetchPriority="high"
                 className="w-[300px] p-[15px]"
                 src="/assets/Landing/todoWholeImage.png"
                 alt="whole-todo-image"
@@ -54,6 +56,7 @@ const Benefits = () => {
             </div>
             <div className="border border-[1.5px] border-grey  rounded-[12px] overflow-hidden">
               <img
+                fetchPriority="high"
                 className="w-[300px] p-[15px]"
                 src="/assets/Landing/blogWholeImage.png"
                 alt="whole-blog-image"
@@ -78,6 +81,7 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchPriority="high"
                 className="w-[310px] p-[15px]"
                 src="/assets/Landing/detailAnalysisImage.png"
                 alt="detailAnalysisImage1"
@@ -85,6 +89,7 @@ const Benefits = () => {
             </div>
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchPriority="high"
                 className="w-[310px] p-[15px]"
                 src="/assets/Landing/detailAnalysisImage2.png"
                 alt="detailAnalysisImage2"
@@ -101,6 +106,7 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchPriority="high"
                 className="w-[310px] p-[15px]"
                 src="/assets/Landing/MainAnalysisImage.png"
                 alt="MainAnalysisImage"
@@ -127,6 +133,7 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchPriority="high"
                 className="w-[310px] p-[15px]"
                 src="/assets/Landing/todayRoutineImage.png"
                 alt="todayRoutineImage"

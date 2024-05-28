@@ -84,6 +84,7 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
+                fetchPriority="high"
                 className="object-contain"
                 src="/assets/todoType.png"
                 alt="routine-color-image"
@@ -104,6 +105,7 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
+                fetchPriority="high"
                 className="object-contain"
                 src="/assets/blogType.png"
                 alt="routine-color-image"
@@ -155,6 +157,7 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
+                fetchPriority="high"
                 className="object-contain"
                 src="/assets/setColor.png"
                 alt="routine-color-image"
@@ -177,6 +180,7 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[10px] cursor-pointer opacity-[0.5]">
               <img
+                fetchPriority="high"
                 className="object-contain"
                 src="/assets/setColor2.png"
                 alt="routine-color-image"

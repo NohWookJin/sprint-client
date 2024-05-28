@@ -62,6 +62,7 @@ const Profile = () => {
         ) : (
           <>
             <img
+              fetchPriority="high"
               className="rounded-[50%] shadow-blue-glow hover:shadow-blue-glow-hover transition-shadow duration-300 ease-in-out"
               src={userLevel}
               alt="profile-image"
