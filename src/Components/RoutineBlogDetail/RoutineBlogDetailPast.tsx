@@ -14,11 +14,11 @@ const RoutineBlogDetailPast = ({
 }: RoutineBlogDetailPastProps) => {
   const sortedPast: { [date: string]: Blog[] } = Object.entries(past)
     .sort(([dateA], [dateB]) => (dateA > dateB ? -1 : 1))
-    .reduce((acc: { [date: string]: Blog[] }, [date, todos]) => {
+    .reduce((acc: { [date: string]: Blog[] }, [date, blogs]) => {
       const newDate = new Date(date);
-      newDate.setDate(newDate.getDate() + 1);
+      // newDate.setHours(newDate.getHours() + 9);
       const newDateString = newDate.toISOString().split("T")[0];
-      acc[newDateString] = todos;
+      acc[newDateString] = blogs;
       return acc;
     }, {});
 
