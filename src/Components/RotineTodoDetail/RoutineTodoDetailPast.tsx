@@ -12,8 +12,6 @@ const RoutineTodoDetailPast = ({
   name,
   targetCount,
 }: RoutineTodoDetailPastProps) => {
-  console.log(past);
-
   const sortedPast: { [date: string]: Todo[] } = Object.entries(past)
     .sort(([dateA], [dateB]) => (dateA > dateB ? -1 : 1))
     .reduce((acc: { [date: string]: Todo[] }, [date, todos]) => {
