@@ -45,15 +45,55 @@ const RoutineBlogDetailEditor = () => {
     setFormDataBlog({ ...formDataBlog, content });
   };
 
+  const convertImageToWebP = (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx?.drawImage(img, 0, 0);
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                const webpFile = new File([blob], file.name, {
+                  type: "image/webp",
+                });
+                resolve(webpFile);
+              } else {
+                reject(new Error("WebP 변환 실패"));
+              }
+            },
+            "image/webp",
+            0.75
+          );
+        };
+        img.src = event.target?.result as string;
+      };
+      reader.onerror = function (error) {
+        reject(error);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.click();
-    input.addEventListener("change", () => {
+    input.addEventListener("change", async () => {
       const file = input.files?.[0];
       if (file) {
-        setFormDataBlog((prev) => ({ ...prev, image: file }));
+        try {
+          const webpFile = await convertImageToWebP(file);
+          setFormDataBlog((prev) => ({ ...prev, image: webpFile }));
+        } catch (error) {
+          console.error("이미지 변환 실패:", error);
+        }
       }
     });
   }, []);
