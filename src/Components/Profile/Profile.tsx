@@ -12,7 +12,7 @@ const badgeDescriptions: { [key: string]: string } = {
   LEGEND: "🎉 30일 이상 연속으로 특정 루틴 목표 달성",
   HUNGER: "🎉 1개 이상의 루틴 생성",
   SATIETY: "🎉 3개 이상의 루틴 생성",
-  FULLNESS: "🎉 5개 이상의 루틴 생성s",
+  FULLNESS: "🎉 5개 이상의 루틴 생성",
 };
 
 const Profile = () => {
@@ -24,16 +24,21 @@ const Profile = () => {
   const onChangeProfile = (user_level: string) => {
     switch (user_level) {
       case "lv1":
-        return "/assets/level1.png";
+        return "/assets/level1.webp";
       case "lv2":
-        return "/assets/level2.png";
+        return "/assets/level2.webp";
       case "lv3":
-        return "/assets/level3.png";
+        return "/assets/level3.webp";
       case "lv4":
-        return "/assets/level4.png";
+        return "/assets/level4.webp";
       default:
-        return "/assets/level1.png";
+        return "/assets/level1.webp";
     }
+  };
+
+  const preloadImage = (src: string) => {
+    const img = new Image();
+    img.src = src;
   };
 
   const formatLevel = (user_level: string) => {
@@ -48,6 +53,7 @@ const Profile = () => {
         setProfile(res);
         const level = onChangeProfile(res.level);
         setUserLevel(level);
+        preloadImage(level);
       }
       setLoading(false);
     };
@@ -62,7 +68,8 @@ const Profile = () => {
         ) : (
           <>
             <img
-              className="rounded-[50%] shadow-blue-glow hover:shadow-blue-glow-hover transition-shadow duration-300 ease-in-out"
+              fetchpriority="high"
+              className="rounded-[50%] w-[180px] h-[180px] shadow-blue-glow hover:shadow-blue-glow-hover transition-shadow duration-300 ease-in-out"
               src={userLevel}
               alt="profile-image"
             />

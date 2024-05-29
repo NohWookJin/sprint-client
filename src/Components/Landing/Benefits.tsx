@@ -1,6 +1,22 @@
+import { useEffect } from "react";
 import Reveal from "./Reveal";
 
 const Benefits = () => {
+  const preloadImage = (src: string) => {
+    const img = new Image();
+    img.src = src;
+  };
+
+  useEffect(() => {
+    preloadImage("/assets/Landing/growImage.webp");
+    preloadImage("/assets/Landing/todoWholeImage.webp");
+    preloadImage("/assets/Landing/blogWholeImage.webp");
+    preloadImage("/assets/Landing/detailAnalysisImage.webp");
+    preloadImage("/assets/Landing/detailAnalysisImage2.webp");
+    preloadImage("/assets/Landing/MainAnalysisImage.webp");
+    preloadImage("/assets/Landing/todayRoutineImage.webp");
+  }, []);
+
   return (
     <section className="pt-[100px] relaitve">
       <div>
@@ -22,8 +38,9 @@ const Benefits = () => {
         <Reveal>
           <div className="p-[15px] mt-[15px] border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
             <img
+              fetchpriority="high"
               className="object-contain"
-              src="/assets/Landing/growImage.png"
+              src="/assets/Landing/growImage.webp"
               alt="grow-image"
             />
           </div>
@@ -47,15 +64,17 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
               <img
+                fetchpriority="high"
                 className="w-[300px] p-[15px]"
-                src="/assets/Landing/todoWholeImage.png"
+                src="/assets/Landing/todoWholeImage.webp"
                 alt="whole-todo-image"
               />
             </div>
             <div className="border border-[1.5px] border-grey  rounded-[12px] overflow-hidden">
               <img
+                fetchpriority="high"
                 className="w-[300px] p-[15px]"
-                src="/assets/Landing/blogWholeImage.png"
+                src="/assets/Landing/blogWholeImage.webp"
                 alt="whole-blog-image"
               />
             </div>
@@ -78,15 +97,17 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchpriority="high"
                 className="w-[310px] p-[15px]"
-                src="/assets/Landing/detailAnalysisImage.png"
+                src="/assets/Landing/detailAnalysisImage.webp"
                 alt="detailAnalysisImage1"
               />
             </div>
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchpriority="high"
                 className="w-[310px] p-[15px]"
-                src="/assets/Landing/detailAnalysisImage2.png"
+                src="/assets/Landing/detailAnalysisImage2.webp"
                 alt="detailAnalysisImage2"
               />
             </div>
@@ -101,8 +122,9 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchpriority="high"
                 className="w-[310px] p-[15px]"
-                src="/assets/Landing/MainAnalysisImage.png"
+                src="/assets/Landing/MainAnalysisImage.webp"
                 alt="MainAnalysisImage"
               />
             </div>
@@ -127,8 +149,9 @@ const Benefits = () => {
           <div className="flex gap-[30px] pt-[20px]">
             <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
               <img
+                fetchpriority="high"
                 className="w-[310px] p-[15px]"
-                src="/assets/Landing/todayRoutineImage.png"
+                src="/assets/Landing/todayRoutineImage.webp"
                 alt="todayRoutineImage"
               />
             </div>

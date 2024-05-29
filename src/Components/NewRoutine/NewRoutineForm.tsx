@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { RoutineDataForm, postNewRoutine } from "../../API/routines";
 import { useNavigate } from "react-router-dom";
 
@@ -47,6 +47,18 @@ const NewRoutineForm = () => {
     });
   };
 
+  const preloadImage = (src: string) => {
+    const img = new Image();
+    img.src = src;
+  };
+
+  useEffect(() => {
+    preloadImage("/assets/todoType.webp");
+    preloadImage("/assets/blogType.webp");
+    preloadImage("/assets/setColor.webp");
+    preloadImage("/assets/setColor2.webp");
+  }, []);
+
   return (
     <form onSubmit={onSubmit} className="pb-[40px]">
       <div className="flex flex-col pb-[80px]">
@@ -84,8 +96,9 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
+                fetchpriority="high"
                 className="object-contain"
-                src="/assets/todoType.png"
+                src="/assets/todoType.webp"
                 alt="routine-color-image"
               />
             </div>
@@ -104,8 +117,9 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
+                fetchpriority="high"
                 className="object-contain"
-                src="/assets/blogType.png"
+                src="/assets/blogType.webp"
                 alt="routine-color-image"
               />
             </div>
@@ -155,8 +169,9 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
+                fetchpriority="high"
                 className="object-contain"
-                src="/assets/setColor.png"
+                src="/assets/setColor.webp"
                 alt="routine-color-image"
               />
             </div>
@@ -177,8 +192,9 @@ const NewRoutineForm = () => {
             </div>
             <div className="pt-[10px] cursor-pointer opacity-[0.5]">
               <img
+                fetchpriority="high"
                 className="object-contain"
-                src="/assets/setColor2.png"
+                src="/assets/setColor2.webp"
                 alt="routine-color-image"
               />
             </div>
