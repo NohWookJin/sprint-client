@@ -89,7 +89,7 @@ const Profile = () => {
         </div>
         <div className="flex flex-col gap-[5px]">
           <span className="text-[18px] font-semibold">SPRINTER</span>
-          <div className="bg-[#3A7CE1] cursor-pointer font-bold max-w-[60px] flex items-center justify-center rounded-[12px] py-[3px] shadow-lg border border-gray-300 transform transition-all duration-300 ease-in-out hover:scale-105">
+          <div className="border-none bg-[#3A7CE1] cursor-pointer font-bold max-w-[60px] flex items-center justify-center rounded-[12px] py-[3px] shadow-lg border border-gray-300 transform transition-all duration-300 ease-in-out hover:scale-105">
             <span className="text-[13px] text-[white]">
               <span className="pr-[2px] font-semibold">
                 {calculateDaysSinceCreated(profile?.createdAt as string)}
@@ -105,7 +105,7 @@ const Profile = () => {
               <>
                 {profile.badges.map((item, index) => (
                   <div
-                    className={`text-[13px] cursor-pointer font-bold w-fit flex items-center justify-center rounded-[12px] py-[3px] px-[10px]  ${onChangeBadge(
+                    className={`border-none text-[13px] cursor-pointer font-bold w-fit flex items-center justify-center rounded-[12px] py-[3px] px-[10px]  ${onChangeBadge(
                       item
                     )} shadow-lg border border-gray-300 transform transition-all duration-300 ease-in-out hover:scale-105`}
                     key={index}
