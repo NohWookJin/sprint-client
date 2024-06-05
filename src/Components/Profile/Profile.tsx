@@ -118,7 +118,15 @@ const Profile = () => {
               </>
             )}
             {hoveredBadge && (
-              <div className="absolute bottom-[31px] whitespace-nowrap max-w-max left-[175px]  bg-black text-white text-[12px] rounded py-1 px-2 mb-1">
+              <div
+                className="absolute whitespace-nowrap max-w-max left-[175px] bg-black text-white text-[12px] rounded py-1 px-2 mb-1"
+                style={{
+                  bottom:
+                    profile?.badges && profile.badges.length > 4
+                      ? "60px"
+                      : "31px",
+                }}
+              >
                 {badgeDescriptions[hoveredBadge]}
               </div>
             )}
