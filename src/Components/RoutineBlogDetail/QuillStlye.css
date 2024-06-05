@@ -17,3 +17,12 @@
   background-color: rgb(255, 255, 255);
   width: 100%;
 }
+.dark .ql-container {
+  color: white;
+}
+
+.dark .ql-toolbar.ql-snow {
+  border: none !important;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}

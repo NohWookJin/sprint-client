@@ -15,6 +15,8 @@ import "react-quill/dist/quill.snow.css";
 import "./QuillStlye.css";
 import { postBlog } from "../../API/routinesBlog";
 import { formatDateToISO } from "../../lib/timeFormatChange";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
@@ -26,6 +28,8 @@ interface BlogForm {
 }
 
 const RoutineBlogDetailEditor = () => {
+  const darkMode = useRecoilValue(themeState);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -183,14 +187,18 @@ const RoutineBlogDetailEditor = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col shadow-lg pt-[20px] relative"
+      className={`flex flex-col shadow-lg pt-[20px] relative ${
+        darkMode ? "dark: bg-[#23272f]" : ""
+      }`}
     >
       <div className="flex justify-center gap-[30px] mb-[20px]">
         <input
           onChange={onChangeTitle}
           placeholder="제목을 입력하세요."
           type="text"
-          className="px-[3px] py-[20px] w-[95%] text-[30px] border-b border-[#d9d9d9] focus:outline-none"
+          className={`px-[3px] pl-[20px] py-[20px] w-[100%] text-[30px] border-b border-[#d9d9d9] focus:outline-none ${
+            darkMode ? "dark: text-white bg-[#23272f]" : ""
+          }`}
         />
       </div>
       <ReactQuill
@@ -202,7 +210,13 @@ const RoutineBlogDetailEditor = () => {
         onChange={onChangeContent}
         placeholder="루틴을 시작해보세요..."
       />
-      <div className="absolute bg-white bottom-0 z-50 sticky shadow-2xl flex justify-between px-[15px] py-[15px]">
+      <div
+        className={`absolute bottom-0 z-50 sticky shadow-2xl flex justify-between px-[15px] py-[15px] ${
+          darkMode
+            ? "border-t dark: bg-[#23272f] text-white"
+            : "bg-white text-black"
+        }`}
+      >
         <button onClick={onClickBackArrow} className="font-semibold">
           &larr; 나가기
         </button>

@@ -1,4 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 interface RoutineSettingItemProps {
   item: RoutineSettingItemDetail;
@@ -24,6 +26,7 @@ const RoutineSettingItem = ({
   const { name, colorSelection, id } = item;
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [newRoutineName, setNewRoutineName] = useState<string>(name);
+  const darkMode = useRecoilValue(themeState);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -66,7 +69,9 @@ const RoutineSettingItem = ({
               ref={inputRef}
               value={newRoutineName}
               onChange={(e) => setNewRoutineName(e.target.value)}
-              className="focus:outline-none"
+              className={`focus:outline-none ${
+                darkMode ? "dark: bg-[#23272f] text-white" : ""
+              }`}
             />
           </form>
         ) : (
