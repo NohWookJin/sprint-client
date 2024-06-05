@@ -56,6 +56,10 @@ const RoutineTodoDetailAnalysis = ({
             <span className="pl-[5px] text-[#3a7ce1] font-semibold">
               {analysisData.continuity}KM
             </span>
+            <div className="pl-[5px] pt-[5px] text-[12px] opacity-[0.5]">
+              * 현재 스프린트란? 해당 루틴에서 현재까지 연속해서 수행한
+              횟수입니다. (어제 날짜를 기준으로 기록됩니다.)
+            </div>
           </span>
         </div>
         <div className="pt-[20px]">
