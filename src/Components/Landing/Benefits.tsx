@@ -9,8 +9,8 @@ const Benefits = () => {
 
   useEffect(() => {
     preloadImage("/assets/Landing/growImage.webp");
-    preloadImage("/assets/Landing/todoWholeImage.webp");
-    preloadImage("/assets/Landing/blogWholeImage.webp");
+    preloadImage("/assets/todoType.webp");
+    preloadImage("/assets/blogType.webp");
     preloadImage("/assets/Landing/detailAnalysisImage.webp");
     preloadImage("/assets/Landing/detailAnalysisImage2.webp");
     preloadImage("/assets/Landing/MainAnalysisImage.webp");
@@ -65,16 +65,16 @@ const Benefits = () => {
             <div className="border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
               <img
                 fetchpriority="high"
-                className="w-[300px] p-[15px]"
-                src="/assets/Landing/todoWholeImage.webp"
+                className="w-[320px] p-[15px]"
+                src="/assets/todoType.webp"
                 alt="whole-todo-image"
               />
             </div>
             <div className="border border-[1.5px] border-grey  rounded-[12px] overflow-hidden">
               <img
                 fetchpriority="high"
-                className="w-[300px] p-[15px]"
-                src="/assets/Landing/blogWholeImage.webp"
+                className="w-[320px] p-[15px]"
+                src="/assets/blogType.webp"
                 alt="whole-blog-image"
               />
             </div>

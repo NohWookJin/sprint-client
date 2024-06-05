@@ -7,6 +7,8 @@ import {
   isValidPassword,
   isEnteredSamePassword,
 } from "../../lib/validateJoinForm";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 const JoinForm = () => {
   const [formData, setFormData] = useState<SignupForm>({
@@ -27,6 +29,7 @@ const JoinForm = () => {
     password: "",
     confirmPassword: "",
   });
+  const darkMode = useRecoilValue(themeState);
 
   const navigate = useNavigate();
 
@@ -115,19 +118,33 @@ const JoinForm = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex flex-col shadow-2xl w-[70%] px-[20px] py-[20px] rounded-[8px]"
+      className={`flex flex-col shadow-2xl w-[70%] px-[20px] py-[20px] rounded-[8px] ${
+        darkMode ? "dark: bg-white" : ""
+      }`}
     >
       <div className="pb-[10px]">
-        <span className="font-semibold text-[23px]">회원가입</span>
+        <span
+          className={`font-semibold text-[23px] ${
+            darkMode ? "dark: text-black" : ""
+          }`}
+        >
+          회원가입
+        </span>
       </div>
       <div className="flex flex-col gap-[40px] pt-[30px]">
         <label htmlFor="email" className="flex flex-col gap-[10px]">
-          <span className="font-semibold">이메일</span>
+          <span
+            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+          >
+            이메일
+          </span>
           <input
             type="text"
             name="email"
             onChange={onChangeField}
-            className="border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1]"
+            className={`border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           />
           {formErrors.email && (
             <span className="text-[11px] text-[#ff0000] opacity-[0.7]">
@@ -136,12 +153,18 @@ const JoinForm = () => {
           )}
         </label>
         <label htmlFor="name" className="flex flex-col gap-[10px]">
-          <span className="font-semibold">닉네임</span>
+          <span
+            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+          >
+            닉네임
+          </span>
           <input
             type="text"
             name="name"
             onChange={onChangeField}
-            className="border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1]"
+            className={`border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           />
 
           {formErrors.name && (
@@ -151,13 +174,19 @@ const JoinForm = () => {
           )}
         </label>
         <label htmlFor="password" className="flex flex-col gap-[10px]">
-          <span className="font-semibold">비밀번호</span>
+          <span
+            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+          >
+            비밀번호
+          </span>
 
           <input
             type="password"
             name="password"
             onChange={onChangeField}
-            className="border-b focus:outline-none pb-[3px] focus:border-[#3a7ce1]"
+            className={`border-b focus:outline-none pb-[3px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           />
           {formErrors.password && (
             <span className="text-[11px] text-[#ff0000] opacity-[0.7]">
@@ -166,12 +195,18 @@ const JoinForm = () => {
           )}
         </label>
         <label className="flex flex-col gap-[10px]">
-          <span className="font-semibold">비밀번호 확인</span>
+          <span
+            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+          >
+            비밀번호 확인
+          </span>
 
           <input
             type="password"
             onChange={onChangeConfirmPassword}
-            className="border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1]"
+            className={`border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           />
           {formErrors.confirmPassword && (
             <span className="text-[11px] text-[#ff0000] opacity-[0.7]">
@@ -194,7 +229,9 @@ const JoinForm = () => {
         </button>
         <span
           onClick={onClickAlreadyUser}
-          className="cursor-pointer opacity-[0.7] text-[12px] text-right"
+          className={`cursor-pointer opacity-[0.7] text-[12px] text-right ${
+            darkMode ? "dark: text-black" : ""
+          }`}
         >
           * 이미 회원이신가요? <span className="text-[#3a7ce1]"> 로그인</span>
         </span>

@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
 import RoutineTodoDetailTodoItem from "./RoutineTodoDetailTodoItem";
 import type { Todo } from "../../API/routines";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 interface RoutineTodoDetailTodoProps {
   todos: Todo[];
@@ -18,6 +20,8 @@ const RoutineTodoDetailTodo = ({
   onDeleteTodo,
 }: RoutineTodoDetailTodoProps) => {
   const [newTodoContent, setNewTodoContent] = useState("");
+
+  const darkMode = useRecoilValue(themeState);
 
   const onSubmitNewContent = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +42,7 @@ const RoutineTodoDetailTodo = ({
                 onToggleTodo={onToggleTodo}
                 onEditTodo={onEditTodo}
                 onDeleteTodo={onDeleteTodo}
+                darkMode={darkMode}
               />
             ))}
         </div>
@@ -48,7 +53,9 @@ const RoutineTodoDetailTodo = ({
           type="text"
           value={newTodoContent}
           onChange={(e) => setNewTodoContent(e.target.value)}
-          className="border-b border-[#d9d9d9] focus:outline-none w-full p-2 bg-[#F4F4F8]"
+          className={`border-b border-[#d9d9d9] focus:outline-none w-full p-2 bg-[#F4F4F8] ${
+            darkMode ? "dark: text-black" : ""
+          }`}
           placeholder="새로운 투두를 작성해보세요."
         />
       </form>

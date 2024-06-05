@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginDataForm, login } from "../../API/users";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState<LoginDataForm>({
@@ -9,6 +11,8 @@ const LoginForm = () => {
   });
   const [isValidForm, setIsValidForm] = useState<boolean>(false);
   const [isNotUser, setIsNotUser] = useState<boolean>(false);
+
+  const darkMode = useRecoilValue(themeState);
 
   const navigate = useNavigate();
 
@@ -46,10 +50,18 @@ const LoginForm = () => {
     <>
       <form
         onSubmit={onSubmit}
-        className="flex flex-col shadow-2xl w-[60%] px-[20px] py-[20px] rounded-[8px]"
+        className={`flex flex-col shadow-2xl w-[60%] px-[20px] py-[20px] rounded-[8px] ${
+          darkMode ? "dark: bg-white" : ""
+        }`}
       >
         <div className="border-b border-[#d9d9d9] pb-[10px]">
-          <h1 className="font-semibold text-[20px]">로그인</h1>
+          <h1
+            className={`font-semibold text-[20px] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
+          >
+            로그인
+          </h1>
         </div>
         {isNotUser && (
           <div className="w-full mt-[20px]">
@@ -65,13 +77,17 @@ const LoginForm = () => {
             type="text"
             name="email"
             onChange={onChangeField}
-            className="bg-[#f0f0f0] px-[8px] py-[8px] rounded-[3px] text-[13.5px] focus:border-[#3a7ce1]"
+            className={`bg-[#f0f0f0] px-[8px] py-[8px] rounded-[3px] text-[13.5px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           />
           <input
             type="password"
             name="password"
             onChange={onChangeField}
-            className="bg-[#f0f0f0] px-[8px] py-[8px]  text-[13.5px] rounded-[3px] focus:border-[#3a7ce1]"
+            className={`bg-[#f0f0f0] px-[8px] py-[8px]  text-[13.5px] rounded-[3px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           />
         </div>
         <div className="pt-[20px] flex flex-col gap-[20px]">
@@ -88,7 +104,9 @@ const LoginForm = () => {
           </button>
           <span
             onClick={onClickJoin}
-            className="cursor-pointer opacity-[0.7] text-[12px] text-right"
+            className={`cursor-pointer opacity-[0.7] text-[12px] text-right ${
+              darkMode ? "dark: text-black" : ""
+            }`}
           >
             * 회원이 아니신가요?{" "}
             <span className="text-[#3a7ce1]"> 회원가입</span>

@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { RoutineDataForm, postNewRoutine } from "../../API/routines";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 const NewRoutineForm = () => {
   const [formData, setFormData] = useState<RoutineDataForm>({
@@ -10,6 +12,8 @@ const NewRoutineForm = () => {
     colorSelection: "",
   });
   const [isValidForm, setIsValidForm] = useState<boolean>(false);
+
+  const darkMode = useRecoilValue(themeState);
 
   const navigate = useNavigate();
 
@@ -67,7 +71,9 @@ const NewRoutineForm = () => {
         </span>
         <input
           onChange={onChangeField}
-          className="focus:outline-none border-b border-[#d9d9d9] pt-[10px] pb-[10px]"
+          className={`focus:outline-none border-b border-[#d9d9d9] pt-[10px] pb-[10px] ${
+            darkMode ? "dark: bg-[#23272f]" : ""
+          }`}
           name="name"
           type="text"
         />
@@ -97,7 +103,7 @@ const NewRoutineForm = () => {
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
-                className="object-contain"
+                className="object-contain rounded-[8px]"
                 src="/assets/todoType.webp"
                 alt="routine-color-image"
               />
@@ -118,7 +124,7 @@ const NewRoutineForm = () => {
             <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
-                className="object-contain"
+                className="object-contain rounded-[8px]"
                 src="/assets/blogType.webp"
                 alt="routine-color-image"
               />
@@ -138,7 +144,9 @@ const NewRoutineForm = () => {
           onChange={onChangeField}
           name="targetCount"
           value={formData.targetCount}
-          className="focus:outline-none bg-white appearance-none border-none pt-[10px] pb-[10px]"
+          className={`focus:outline-none appearance-none border-none pt-[10px] pb-[10px] ${
+            darkMode ? "dark: bg-[#23272f]" : "bg-white"
+          }`}
         >
           <option value={0} disabled>
             목표 횟수를 선택하세요
@@ -170,7 +178,7 @@ const NewRoutineForm = () => {
             <div className="pt-[10px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
-                className="object-contain"
+                className="object-contain rounded-[4px]"
                 src="/assets/setColor.webp"
                 alt="routine-color-image"
               />
@@ -193,7 +201,7 @@ const NewRoutineForm = () => {
             <div className="pt-[10px] cursor-pointer opacity-[0.5]">
               <img
                 fetchpriority="high"
-                className="object-contain"
+                className="object-contain rounded-[4px]"
                 src="/assets/setColor2.webp"
                 alt="routine-color-image"
               />

@@ -3,9 +3,13 @@ import { Outlet } from "react-router-dom";
 import Header from "../Components/Common/Header";
 import ScreenMessage from "../Components/Common/ScreenMessage";
 import "../index.css";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../Store/themeState";
 
 const MainLayout = () => {
   const [isMobileView, setIsMobileView] = useState(false);
+
+  const darkMode = useRecoilValue(themeState);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,7 +30,11 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="relative mx-auto min-h-screen min-w-[360px] max-w-[640px]">
+    <div
+      className={`relative mx-auto min-h-screen min-w-[360px] max-w-[640px] ${
+        darkMode ? "dark" : ""
+      }`}
+    >
       <Header />
       {isMobileView && <ScreenMessage />}
       <div className={`h-full ${isMobileView ? "blur-sm" : ""}`}>

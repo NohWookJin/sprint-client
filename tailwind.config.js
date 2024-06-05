@@ -15,5 +15,6 @@ export default {
       boxShadow: ["hover"],
     },
   },
+  darkMode: "class",
   plugins: [],
 };
