@@ -6,6 +6,7 @@ interface RoutineTodoDetailTodoItemProps {
   onToggleTodo: (id: number, completed: boolean) => void;
   onEditTodo: (id: number, content: string) => void;
   onDeleteTodo: (id: number) => void;
+  darkMode: boolean;
 }
 
 const RoutineTodoDetailTodoItem = ({
@@ -13,6 +14,7 @@ const RoutineTodoDetailTodoItem = ({
   onToggleTodo,
   onEditTodo,
   onDeleteTodo,
+  darkMode,
 }: RoutineTodoDetailTodoItemProps) => {
   const { content, id, completed } = todo;
   const [isCompleted, setIsCompleted] = useState<boolean>(completed);
@@ -57,14 +59,16 @@ const RoutineTodoDetailTodoItem = ({
               value={editedContent}
               ref={inputRef}
               onChange={(e) => setEditedContent(e.target.value)}
-              className="focus:outline-none w-full bg-[#F4F4F8]"
+              className={`focus:outline-none w-full bg-[#F4F4F8] ${
+                darkMode ? "dark: text-black" : ""
+              }`}
             />
           </form>
         ) : (
           <span
             className={`truncate ${
               isCompleted ? "line-through opacity-60" : ""
-            }`}
+            } ${darkMode ? "dark: text-black" : ""}`}
           >
             {content}
           </span>
@@ -73,7 +77,9 @@ const RoutineTodoDetailTodoItem = ({
       <div className="flex items-center gap-2">
         {isEditing ? (
           <span
-            className="text-xs opacity-60 cursor-pointer"
+            className={`text-xs opacity-60 cursor-pointer ${
+              darkMode ? "dark: text-black" : ""
+            }`}
             onClick={onSaveEditContent}
           >
             저장
@@ -81,13 +87,17 @@ const RoutineTodoDetailTodoItem = ({
         ) : (
           <>
             <span
-              className="text-xs opacity-60 cursor-pointer"
+              className={`text-xs opacity-60 cursor-pointer ${
+                darkMode ? "dark: text-black" : ""
+              }`}
               onClick={() => setIsEditing(true)}
             >
               수정
             </span>
             <span
-              className="text-xs opacity-60 cursor-pointer"
+              className={`text-xs opacity-60 cursor-pointer ${
+                darkMode ? "dark: text-black" : ""
+              }`}
               onClick={() => onDeleteTodo(id)}
             >
               삭제

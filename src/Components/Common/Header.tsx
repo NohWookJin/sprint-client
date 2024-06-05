@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import ThemeBtn from "./ThemeBtn";
 import { getCookie, setCookieLogout } from "../../lib/userCookie";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 const Header = () => {
   const navigate = useNavigate();
   const accessToken = getCookie("SP_AES");
+
+  const darkMode = useRecoilValue(themeState);
 
   const onClikcLogout = () => {
     setCookieLogout("SP_AES");
@@ -13,7 +18,11 @@ const Header = () => {
   };
 
   return (
-    <header className="max-w-[640px] flex items-end justify-between py-[20px] mb-[5px]">
+    <header
+      className={`max-w-[640px] flex items-end justify-between py-[20px] mb-[5px] ${
+        darkMode ? "dark" : ""
+      }`}
+    >
       <div onClick={() => navigate("/")}>
         <div className="flex items-end gap-[10px] cursor-pointer">
           <span className="text-[46px] font-semibold text-[#3A7CE1] ">
@@ -25,7 +34,7 @@ const Header = () => {
         </div>
       </div>
       <div className="flex justify-between items-center gap-[15px] pb-[12px]">
-        {/* <span className="text-[14px]">후원하기</span> */}
+        <ThemeBtn />
         {accessToken && (
           <div onClick={() => navigate("/routine/setting")}>
             <span className="text-[13px] cursor-pointer opacity-[0.6]">
