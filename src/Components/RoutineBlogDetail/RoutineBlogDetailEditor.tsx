@@ -21,7 +21,7 @@ Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
 const toolbarOptions = [
-  ["link", "image", "video"],
+  ["link", "image"],
   [{ header: [1, 2, 3, false] }],
   ["bold", "italic", "underline", "strike"],
   ["blockquote"],
@@ -212,7 +212,7 @@ const RoutineBlogDetailEditor = () => {
   return (
     <form
       onSubmit={onSubmit}
-      className={`flex flex-col shadow-lg pt-[20px] relative ${
+      className={`flex flex-col shadow-2xl pt-[20px] relative ${
         darkMode ? "dark: bg-[#23272f]" : ""
       }`}
     >
@@ -222,7 +222,9 @@ const RoutineBlogDetailEditor = () => {
           placeholder="제목을 입력하세요."
           type="text"
           className={`px-[3px] pl-[20px] py-[20px] w-[100%] text-[30px] border-b border-[#d9d9d9] focus:outline-none ${
-            darkMode ? "dark: text-white bg-[#23272f]" : ""
+            darkMode
+              ? "dark: text-white bg-[#23272f] border-[#4b5563] border-opacity-30"
+              : ""
           }`}
         />
       </div>
@@ -234,20 +236,24 @@ const RoutineBlogDetailEditor = () => {
         ref={quillRef}
         onChange={onChangeContent}
         placeholder="루틴을 시작해보세요..."
+        className={darkMode ? "ql-dark" : ""}
       />
       <div
         className={`absolute bottom-0 z-50 sticky shadow-2xl flex justify-between px-[15px] py-[15px] ${
           darkMode
-            ? "border-t dark: bg-[#23272f] text-white"
+            ? "border-t border-[#d9d9d9] border-opacity-30 dark: bg-[#23272f] text-white "
             : "bg-white text-black"
         }`}
       >
-        <button onClick={onClickBackArrow} className="font-semibold">
+        <button
+          onClick={onClickBackArrow}
+          className="font-semibold  shadow-lg transform transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105"
+        >
           &larr; 나가기
         </button>
         <button
           type="submit"
-          className="font-semibold bg-[#3a7ce1] text-white px-4 py-2 rounded-[5px]"
+          className="font-semibold bg-[#3a7ce1] text-white px-4 py-2 rounded-[5px]  shadow-lg transform transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105"
         >
           저장하기
         </button>

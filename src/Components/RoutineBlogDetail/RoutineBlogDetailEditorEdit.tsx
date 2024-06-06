@@ -22,7 +22,7 @@ Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
 const toolbarOptions = [
-  ["link", "image", "video"],
+  ["link", "image"],
   [{ header: [1, 2, 3, false] }],
   ["bold", "italic", "underline", "strike"],
   ["blockquote"],
@@ -237,7 +237,7 @@ const RoutineBlogDetailEditorEdit = ({
           value={formDataBlog.title}
           type="text"
           className={`px-[3px] pl-[20px] py-[20px] w-[100%] text-[30px] border-b border-[#d9d9d9] focus:outline-none ${
-            darkMode ? "dark: text-white bg-[#23272f]" : ""
+            darkMode ? "dark: text-white bg-[#23272f] border-opacity-30" : ""
           }`}
         />
       </div>
@@ -249,6 +249,7 @@ const RoutineBlogDetailEditorEdit = ({
         ref={quillRef}
         onChange={onChangeContent}
         placeholder="루틴을 시작해보세요..."
+        className={darkMode ? "ql-dark" : ""}
       />
       <div
         className={`absolute bottom-0 z-50 sticky shadow-2xl flex justify-between px-[15px] py-[15px] ${

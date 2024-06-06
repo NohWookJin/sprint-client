@@ -46,8 +46,10 @@ const RoutineTodoDetailTodoItem = ({
 
   return (
     <div
-      className={`flex items-center justify-between border-b border-[#d9d9d9] pb-2 ${
-        darkMode ? "dark: bg-[#23272f] text-white" : ""
+      className={`flex items-center justify-between shadow-2xl border-b  pb-2 ${
+        darkMode
+          ? "dark: bg-[#23272f] border-[#4b5563] text-white border-opacity-30"
+          : "border-[#d9d9d9]"
       }`}
     >
       <div className="flex items-center gap-2">

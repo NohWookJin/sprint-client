@@ -119,13 +119,15 @@ const JoinForm = () => {
     <form
       onSubmit={onSubmit}
       className={`flex flex-col shadow-2xl w-[70%] px-[20px] py-[20px] rounded-[8px] ${
-        darkMode ? "dark: bg-white" : ""
+        darkMode
+          ? "dark: bg-[#23272f] border border-[#d9d9d9] text-white border border-opacity-30"
+          : ""
       }`}
     >
       <div className="pb-[10px]">
         <span
           className={`font-semibold text-[23px] ${
-            darkMode ? "dark: text-black" : ""
+            darkMode ? "dark: text-white" : ""
           }`}
         >
           회원가입
@@ -134,7 +136,7 @@ const JoinForm = () => {
       <div className="flex flex-col gap-[40px] pt-[30px]">
         <label htmlFor="email" className="flex flex-col gap-[10px]">
           <span
-            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+            className={`font-semibold ${darkMode ? "dark: text-white" : ""}`}
           >
             이메일
           </span>
@@ -143,7 +145,7 @@ const JoinForm = () => {
             name="email"
             onChange={onChangeField}
             className={`border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1] ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white bg-[#23272f]" : ""
             }`}
           />
           {formErrors.email && (
@@ -154,7 +156,7 @@ const JoinForm = () => {
         </label>
         <label htmlFor="name" className="flex flex-col gap-[10px]">
           <span
-            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+            className={`font-semibold ${darkMode ? "dark: text-white" : ""}`}
           >
             닉네임
           </span>
@@ -163,7 +165,7 @@ const JoinForm = () => {
             name="name"
             onChange={onChangeField}
             className={`border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1] ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white bg-[#23272f]" : ""
             }`}
           />
 
@@ -175,7 +177,7 @@ const JoinForm = () => {
         </label>
         <label htmlFor="password" className="flex flex-col gap-[10px]">
           <span
-            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+            className={`font-semibold ${darkMode ? "dark: text-white" : ""}`}
           >
             비밀번호
           </span>
@@ -185,7 +187,7 @@ const JoinForm = () => {
             name="password"
             onChange={onChangeField}
             className={`border-b focus:outline-none pb-[3px] focus:border-[#3a7ce1] ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white bg-[#23272f]" : ""
             }`}
           />
           {formErrors.password && (
@@ -196,7 +198,7 @@ const JoinForm = () => {
         </label>
         <label className="flex flex-col gap-[10px]">
           <span
-            className={`font-semibold ${darkMode ? "dark: text-black" : ""}`}
+            className={`font-semibold ${darkMode ? "dark: text-white" : ""}`}
           >
             비밀번호 확인
           </span>
@@ -205,7 +207,7 @@ const JoinForm = () => {
             type="password"
             onChange={onChangeConfirmPassword}
             className={`border-b focus:outline-none pb-[5px] focus:border-[#3a7ce1] ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white bg-[#23272f]" : ""
             }`}
           />
           {formErrors.confirmPassword && (
@@ -230,7 +232,7 @@ const JoinForm = () => {
         <span
           onClick={onClickAlreadyUser}
           className={`cursor-pointer opacity-[0.7] text-[12px] text-right ${
-            darkMode ? "dark: text-black" : ""
+            darkMode ? "dark: text-white" : ""
           }`}
         >
           * 이미 회원이신가요? <span className="text-[#3a7ce1]"> 로그인</span>

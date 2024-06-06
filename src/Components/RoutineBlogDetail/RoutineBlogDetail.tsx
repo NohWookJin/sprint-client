@@ -48,7 +48,7 @@ const RoutineBlogDetail = ({ routineId }: RoutineBlogDetailProps) => {
             <span>{todayDate} - 오늘의 블로그</span>
             <span
               onClick={onClickNewItem}
-              className="text-[16px] cursor-pointer mt-[-3px]"
+              className="text-[16px] cursor-pointer mt-[-3px] shadow-lg transform transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105"
             >
               + 작성하기
             </span>
