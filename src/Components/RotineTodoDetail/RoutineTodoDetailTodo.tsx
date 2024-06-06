@@ -30,7 +30,13 @@ const RoutineTodoDetailTodo = ({
   };
 
   return (
-    <div className="mb-[60px] bg-[#F4F4F8] w-full flex flex-col justify-between shadow-2xl rounded-lg p-4">
+    <div
+      className={`mb-[60px] w-full flex flex-col justify-between shadow-2xl rounded-lg p-4 ${
+        darkMode
+          ? "dark: bg-[#23272f] text-white border border-opacity-30"
+          : " bg-[#F4F4F8]"
+      }`}
+    >
       {todos.length !== 0 && (
         <div className="flex flex-col gap-[15px]">
           {todos
@@ -48,13 +54,20 @@ const RoutineTodoDetailTodo = ({
         </div>
       )}
 
-      <form onSubmit={onSubmitNewContent} className="mt-[20px]">
+      <form
+        onSubmit={onSubmitNewContent}
+        className={`mt-[20px] ${
+          darkMode ? "dark: bg-[#23272f] text-white" : ""
+        }`}
+      >
         <input
           type="text"
           value={newTodoContent}
           onChange={(e) => setNewTodoContent(e.target.value)}
-          className={`border-b border-[#d9d9d9] focus:outline-none w-full p-2 bg-[#F4F4F8] ${
-            darkMode ? "dark: text-black" : ""
+          className={` focus:outline-none w-full p-2  ${
+            darkMode
+              ? "dark: bg-[#23272f] text-white"
+              : "border-b border-[#d9d9d9] bg-[#F4F4F8]"
           }`}
           placeholder="새로운 투두를 작성해보세요."
         />

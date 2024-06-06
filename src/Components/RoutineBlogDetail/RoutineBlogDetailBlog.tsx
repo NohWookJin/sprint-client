@@ -1,5 +1,7 @@
 import RoutineBlogDetailBlogItem from "./RoutineBlogDetailBlogItem";
 import type { Blog } from "../../API/getRoutineBlog";
+import { themeState } from "../../Store/themeState";
+import { useRecoilValue } from "recoil";
 
 interface RoutineBlogDetailBlogProps {
   blog: Blog[];
@@ -10,6 +12,8 @@ const RoutineBlogDetailBlog = ({
   blog,
   routineId,
 }: RoutineBlogDetailBlogProps) => {
+  const darkMode = useRecoilValue(themeState);
+
   return (
     <div className="mb-[60px] w-full flex flex-col justify-between ">
       {blog.length === 0 ? (
@@ -25,6 +29,7 @@ const RoutineBlogDetailBlog = ({
               key={blog.id}
               blog={blog}
               routineId={routineId}
+              isDark={darkMode}
             />
           ))}
         </div>
