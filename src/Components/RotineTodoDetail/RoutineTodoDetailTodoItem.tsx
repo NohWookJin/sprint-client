@@ -45,7 +45,11 @@ const RoutineTodoDetailTodoItem = ({
   }, [isEditing]);
 
   return (
-    <div className="flex items-center justify-between border-b border-[#d9d9d9] pb-2">
+    <div
+      className={`flex items-center justify-between border-b border-[#d9d9d9] pb-2 ${
+        darkMode ? "dark: bg-[#23272f] text-white" : ""
+      }`}
+    >
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -59,8 +63,8 @@ const RoutineTodoDetailTodoItem = ({
               value={editedContent}
               ref={inputRef}
               onChange={(e) => setEditedContent(e.target.value)}
-              className={`focus:outline-none w-full bg-[#F4F4F8] ${
-                darkMode ? "dark: text-black" : ""
+              className={`focus:outline-none w-full  ${
+                darkMode ? "dark: bg-[#23272f] text-white" : "bg-[#F4F4F8]"
               }`}
             />
           </form>
@@ -68,7 +72,7 @@ const RoutineTodoDetailTodoItem = ({
           <span
             className={`truncate ${
               isCompleted ? "line-through opacity-60" : ""
-            } ${darkMode ? "dark: text-black" : ""}`}
+            } ${darkMode ? "dark: text-white" : ""}`}
           >
             {content}
           </span>
@@ -78,7 +82,7 @@ const RoutineTodoDetailTodoItem = ({
         {isEditing ? (
           <span
             className={`text-xs opacity-60 cursor-pointer ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white" : ""
             }`}
             onClick={onSaveEditContent}
           >
@@ -88,7 +92,7 @@ const RoutineTodoDetailTodoItem = ({
           <>
             <span
               className={`text-xs opacity-60 cursor-pointer ${
-                darkMode ? "dark: text-black" : ""
+                darkMode ? "dark: text-white" : ""
               }`}
               onClick={() => setIsEditing(true)}
             >
@@ -96,7 +100,7 @@ const RoutineTodoDetailTodoItem = ({
             </span>
             <span
               className={`text-xs opacity-60 cursor-pointer ${
-                darkMode ? "dark: text-black" : ""
+                darkMode ? "dark: text-white" : ""
               }`}
               onClick={() => onDeleteTodo(id)}
             >

@@ -1,7 +1,7 @@
 import {
   ChangeEvent,
   FormEvent,
-  useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -10,10 +10,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
-import { formats } from "./QuillEditor";
 import "react-quill/dist/quill.snow.css";
 import "./QuillStlye.css";
-import { postBlog } from "../../API/routinesBlog";
+import { postBlog, uploadImage, BlogData } from "../../API/routinesBlog";
 import { formatDateToISO } from "../../lib/timeFormatChange";
 import { useRecoilValue } from "recoil";
 import { themeState } from "../../Store/themeState";
@@ -21,10 +20,41 @@ import { themeState } from "../../Store/themeState";
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
+const toolbarOptions = [
+  ["link", "image", "video"],
+  [{ header: [1, 2, 3, false] }],
+  ["bold", "italic", "underline", "strike"],
+  ["blockquote"],
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ color: [] }, { background: [] }],
+  [{ align: [] }],
+];
+
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "align",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "background",
+  "color",
+  "link",
+  "image",
+  "video",
+  "width",
+];
+
 interface BlogForm {
   title: string;
   content: string;
-  image?: File;
+  imagePath?: string;
 }
 
 const RoutineBlogDetailEditor = () => {
@@ -33,21 +63,14 @@ const RoutineBlogDetailEditor = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { routineId } = location.state || {};
+  const { routineId } = (location.state as { routineId: number }) || {};
   const quillRef = useRef<ReactQuill>(null);
 
   const [formDataBlog, setFormDataBlog] = useState<BlogForm>({
     title: "",
     content: "",
+    imagePath: "",
   });
-
-  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormDataBlog({ ...formDataBlog, title: e.target.value });
-  };
-
-  const onChangeContent = (content: string) => {
-    setFormDataBlog({ ...formDataBlog, content });
-  };
 
   const convertImageToWebP = (file: File): Promise<File> => {
     return new Promise((resolve, reject) => {
@@ -63,12 +86,16 @@ const RoutineBlogDetailEditor = () => {
           canvas.toBlob(
             (blob) => {
               if (blob) {
-                const webpFile = new File([blob], file.name, {
-                  type: "image/webp",
-                });
+                const webpFile = new File(
+                  [blob],
+                  file.name.replace(/\.[^.]+$/, ".webp"),
+                  {
+                    type: "image/webp",
+                  }
+                );
                 resolve(webpFile);
               } else {
-                reject(new Error("WebP 변환 실패"));
+                reject(new Error("WebP 변환에 실패했습니다."));
               }
             },
             "image/webp",
@@ -84,38 +111,62 @@ const RoutineBlogDetailEditor = () => {
     });
   };
 
-  const imageHandler = useCallback(() => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-    input.addEventListener("change", async () => {
-      const file = input.files?.[0];
-      if (file) {
-        try {
-          const webpFile = await convertImageToWebP(file);
-          setFormDataBlog((prev) => ({ ...prev, image: webpFile }));
-        } catch (error) {
-          console.error("이미지 변환 실패:", error);
-        }
-      }
-    });
-  }, []);
+  useEffect(() => {
+    const quill = quillRef.current;
 
-  const onClickBackArrow = () => {
-    navigate(-1);
-  };
+    const handleImage = () => {
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.click();
+
+      input.onchange = async () => {
+        const file = input.files?.[0];
+        if (file) {
+          try {
+            const webpFile = await convertImageToWebP(file);
+            const imageData = new FormData();
+            imageData.append("file", webpFile);
+            const response = await uploadImage(routineId, imageData);
+            if (response) {
+              const url = response.imageUrl;
+              const quillEditor = quill?.getEditor();
+              const range = quill?.getEditor().getSelection();
+              quillEditor?.insertEmbed(range?.index as number, "image", url);
+              quillEditor?.setSelection({
+                index: (range?.index as number) + 1,
+                length: 0,
+              });
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      };
+    };
+    if (quillRef.current) {
+      const toolbar = quillRef.current.getEditor().getModule("toolbar");
+      toolbar.addHandler("image", handleImage);
+    }
+  }, [routineId]);
+
+  const modules = useMemo(() => {
+    return {
+      toolbar: {
+        container: toolbarOptions,
+      },
+    };
+  }, []);
 
   const onSaveContent = async () => {
     try {
-      const formDataWithImage = new FormData();
-      formDataWithImage.append("title", formDataBlog.title);
-      formDataWithImage.append("content", formDataBlog.content);
-      if (formDataBlog.image) {
-        formDataWithImage.append("image", formDataBlog.image);
-      }
+      const blogData: BlogData = {
+        title: formDataBlog.title,
+        content: formDataBlog.content,
+        imagePath: formDataBlog.imagePath,
+      };
 
-      const data = await postBlog(routineId, formDataWithImage);
+      const data = await postBlog(routineId, blogData);
 
       if (data) {
         const date = formatDateToISO(data.date);
@@ -127,11 +178,19 @@ const RoutineBlogDetailEditor = () => {
         });
       } else {
         navigate(-1);
-        console.error("이미지 전송 실패");
+        alert("블로그 생성이 실패했습니다.");
       }
     } catch (error) {
       console.error("Error saving blog:", error);
     }
+  };
+
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormDataBlog({ ...formDataBlog, title: e.target.value });
+  };
+
+  const onChangeContent = (content: string) => {
+    setFormDataBlog({ ...formDataBlog, content });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -146,43 +205,9 @@ const RoutineBlogDetailEditor = () => {
     }
   };
 
-  const modules = useMemo(() => {
-    return {
-      imageActions: {},
-      imageFormats: {},
-      toolbar: {
-        container: [
-          [{ size: ["small", false, "large", "huge"] }],
-          [{ align: [] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            "link",
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
-          [
-            {
-              color: [
-                "#000000",
-                "#e60000",
-                "#ff9900",
-                "#ffff00",
-                "#008a00",
-                "#0066cc",
-              ],
-            },
-            { background: [] },
-          ],
-          [{ image: imageHandler }],
-        ],
-        ImageResize: {
-          parchment: Quill.import("parchment"),
-        },
-      },
-    };
-  }, [imageHandler]);
+  const onClickBackArrow = () => {
+    navigate(-1);
+  };
 
   return (
     <form
