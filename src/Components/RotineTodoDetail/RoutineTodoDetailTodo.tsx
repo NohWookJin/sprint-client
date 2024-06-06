@@ -33,8 +33,8 @@ const RoutineTodoDetailTodo = ({
     <div
       className={`mb-[60px] w-full flex flex-col justify-between shadow-2xl rounded-lg p-4 ${
         darkMode
-          ? "dark: bg-[#23272f] text-white border border-opacity-30"
-          : " bg-[#F4F4F8]"
+          ? "dark: bg-[#23272f] border-[#4b5563] text-white border border-opacity-30"
+          : "bg-[#F4F4F8]"
       }`}
     >
       {todos.length !== 0 && (
@@ -57,7 +57,7 @@ const RoutineTodoDetailTodo = ({
       <form
         onSubmit={onSubmitNewContent}
         className={`mt-[20px] ${
-          darkMode ? "dark: bg-[#23272f] text-white" : ""
+          darkMode ? "dark: bg-[#23272f] text-white" : "bg-[#F4F4F8]"
         }`}
       >
         <input
@@ -66,7 +66,7 @@ const RoutineTodoDetailTodo = ({
           onChange={(e) => setNewTodoContent(e.target.value)}
           className={` focus:outline-none w-full p-2  ${
             darkMode
-              ? "dark: bg-[#23272f] text-white"
+              ? "dark: bg-[#23272f] text-white border-b border-[#4b5563]"
               : "border-b border-[#d9d9d9] bg-[#F4F4F8]"
           }`}
           placeholder="새로운 투두를 작성해보세요."

@@ -4,6 +4,6 @@ const { persistAtom } = recoilPersist();
 
 export const themeState = atom<boolean>({
   key: "themeState",
-  default: false,
+  default: true,
   effects_UNSTABLE: [persistAtom],
 });

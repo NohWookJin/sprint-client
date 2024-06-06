@@ -55,19 +55,19 @@ const RoutineBlogDetailBlogItem = ({
 
   return (
     <div
-      className={` cursor-pointer shadow rounded-lg p-4 min-h-[30px] ${
+      className={` cursor-pointer shadow-2xl rounded-lg p-4 min-h-[30px] ${
         isDark
-          ? "dark: bg-[#23272f] text-white border border-opacity-30"
+          ? "dark: bg-[#23272f] border border-[#d9d9d9] text-white border border-opacity-30"
           : "bg-[#F4F4F8]"
       }`}
     >
       <div
-        className="flex justify-between items-center overflow-hidden text-ellipsis truncate "
+        className="flex justify-between items-center"
         onClick={() => {
           onClickTodayDetailBlog(blog.id, blog.title, blog.content);
         }}
       >
-        <div className="flex gap-[20px] ">
+        <div className="flex gap-[20px] items-start">
           {previewImageUrl && (
             <img
               src={previewImageUrl}
@@ -82,7 +82,7 @@ const RoutineBlogDetailBlogItem = ({
             <div className="font-bold text-[20px]">
               <span>{blog.title}</span>
             </div>
-            <div className="text-[15px] opacity-[0.75] max-h-[30px] overflow-hidden">
+            <div className="text-[15px] opacity-[0.75] max-h-[40px] overflow-hidden">
               <span dangerouslySetInnerHTML={{ __html: contentWithoutImage }} />
             </div>
           </div>

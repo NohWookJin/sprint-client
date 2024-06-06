@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Analysis, getAnalysis } from "../../API/getAnalysis";
 import RoutineDetailAnalysisItem from "../Analysis/RoutineDetailAnalysisItem";
 import { formatDate } from "../../lib/timeFormatChange";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 interface RoutineTodoDetailAnalysisProps {
   routineId: number;
@@ -14,6 +16,7 @@ const RoutineTodoDetailAnalysis = ({
 }: RoutineTodoDetailAnalysisProps) => {
   const [analysisData, setAnalysisData] = useState<Analysis | null>(null);
   const [analysisTable, setAnalysisTable] = useState<number[]>([]);
+  const isDark = useRecoilValue(themeState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,6 +88,7 @@ const RoutineTodoDetailAnalysis = ({
           <RoutineDetailAnalysisItem
             calendar={analysisTable}
             targetCount={analysisData.targetCount}
+            isDark={isDark}
           />
         </div>
       </div>

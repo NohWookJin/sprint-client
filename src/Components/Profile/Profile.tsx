@@ -107,7 +107,7 @@ const Profile = () => {
                   <div
                     className={`border-none text-[13px] cursor-pointer font-bold w-fit flex items-center justify-center rounded-[12px] py-[3px] px-[10px]  ${onChangeBadge(
                       item
-                    )} shadow-lg border border-gray-300 transform transition-all duration-300 ease-in-out hover:scale-105`}
+                    )} shadow-2xl border border-gray-300 transform transition-all duration-300 ease-in-out hover:scale-105`}
                     key={index}
                     onMouseEnter={() => setHoveredBadge(item)}
                     onMouseLeave={() => setHoveredBadge(null)}

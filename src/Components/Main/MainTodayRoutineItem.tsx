@@ -1,3 +1,6 @@
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
+
 interface MainTodayRoutineItemProps {
   item: {
     id: number;
@@ -14,6 +17,8 @@ const MainTodayRoutineItem = ({
 }: MainTodayRoutineItemProps) => {
   const { name, count, id, routineType } = item;
 
+  const isDark = useRecoilValue(themeState);
+
   const onClickItem = () => {
     window.location.href = `/routine/${id}?routineType=${routineType}`;
   };
@@ -21,10 +26,18 @@ const MainTodayRoutineItem = ({
   return (
     <div
       onClick={onClickItem}
-      className="cursor-pointer flex flex-col gap-[30px] bg-[#F4F4F8] w-[200px] h-[200px] shadow-2xl rounded-lg p-5 transform transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105"
+      className={`cursor-pointer flex flex-col  gap-[30px] w-[200px] h-[200px] shadow-2xl rounded-lg p-5 transform transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105 ${
+        isDark
+          ? "dark: border border-[#4b5563] bg-[#23272f] text-white shadow-2xl"
+          : "bg-[#F4F4F8] shadow-lg"
+      }`}
     >
       <div className="flex justify-between items-center">
-        <div className="text-[20px] font-semibold text-[#495057]">
+        <div
+          className={`text-[20px] font-semibold  ${
+            isDark ? "dark: text-white" : "text-[#495057]"
+          }`}
+        >
           <span>{name}</span>
         </div>
         <div>
@@ -32,7 +45,11 @@ const MainTodayRoutineItem = ({
         </div>
       </div>
       {category === "todo" ? (
-        <div className="text-[16px] text-[#495057] font-light">
+        <div
+          className={`text-[16px]  font-light ${
+            isDark ? "dark: text-white" : "text-[#495057]"
+          }`}
+        >
           {count > 0 ? (
             <>
               <div className="pb-[3px]">투두리스트 작성이 </div>
@@ -54,7 +71,11 @@ const MainTodayRoutineItem = ({
           </div>
         </div>
       ) : (
-        <div className="text-[16px] text-[#495057] font-light">
+        <div
+          className={`text-[16px]  font-light ${
+            isDark ? "dark: text-white" : "text-[#495057]"
+          }`}
+        >
           {count > 0 ? (
             <>
               <div className="pb-[3px]">블로그 작성이 </div>
@@ -71,7 +92,11 @@ const MainTodayRoutineItem = ({
               </span>
             </div>
           )}
-          <div className="text-[11px] pt-[33px] opacity-[0.5]">
+          <div
+            className={`text-[11px] pt-[33px] opacity-[0.5] ${
+              isDark ? "dark: text-white" : ""
+            }`}
+          >
             * {name} 루틴 이동하기
           </div>
         </div>

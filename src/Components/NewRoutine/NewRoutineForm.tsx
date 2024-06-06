@@ -71,7 +71,7 @@ const NewRoutineForm = () => {
         </span>
         <input
           onChange={onChangeField}
-          className={`focus:outline-none border-b border-[#d9d9d9] pt-[10px] pb-[10px] ${
+          className={`focus:outline-none border-b border-[#d9d9d9] border-opacity-30 pt-[10px] pb-[10px] ${
             darkMode ? "dark: bg-[#23272f]" : ""
           }`}
           name="name"
@@ -100,7 +100,7 @@ const NewRoutineForm = () => {
                 투두리스트
               </span>
             </div>
-            <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
+            <div className="border border-[1.5px] border-opacity-30 border-[#d9d9d9] rounded-[12px] overflow-hidden pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="object-contain rounded-[8px]"
@@ -121,7 +121,7 @@ const NewRoutineForm = () => {
                 블로그
               </span>
             </div>
-            <div className="pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
+            <div className="border border-[1.5px] border-opacity-30 border-[#d9d9d9] rounded-[12px] overflow-hidden pt-[25px] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="object-contain rounded-[8px]"
@@ -163,7 +163,7 @@ const NewRoutineForm = () => {
           4. 새로운 루틴의 잔디 색상을 정해주세요.
         </span>
         <div className="flex items-center gap-[30px]">
-          <label className="min-w-[300px] flex flex-col">
+          <label className="max-w-[300px] flex flex-col">
             <div>
               <input
                 onChange={onChangeField}
@@ -184,35 +184,12 @@ const NewRoutineForm = () => {
               />
             </div>
           </label>
-          <label className="min-w-[300px] flex flex-col">
-            <div className="relative cursor-not-allowed">
-              <input
-                onChange={onChangeField}
-                name="colorSelection"
-                type="radio"
-                value="#30A14E"
-                disabled
-              />
-              <span className="pl-[10px]  text-[16px] font-semibold">녹색</span>
-              <div className="text-[11.5px] opacity-[0.6] absolute top-[8px] left-[60px]">
-                아직 지원하지 않고 있어요.
-              </div>
-            </div>
-            <div className="pt-[10px] cursor-pointer opacity-[0.5]">
-              <img
-                fetchpriority="high"
-                className="object-contain rounded-[4px]"
-                src="/assets/setColor2.webp"
-                alt="routine-color-image"
-              />
-            </div>
-          </label>
         </div>
       </div>
       <button
         className={`bg-[#3A7CE1] text-white w-full h-[45px] rounded-[6px] ${
           isValidForm
-            ? "bg-[#3a7ce1] cursor-pointer"
+            ? "bg-[#3a7ce1] cursor-pointer shadow-lg transform transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105"
             : "bg-gray-400 cursor-not-allowed"
         }`}
         disabled={!isValidForm}

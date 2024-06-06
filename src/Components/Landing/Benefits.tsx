@@ -26,7 +26,7 @@ const Benefits = () => {
           </h1>
         </Reveal>
         <Reveal>
-          <div className="w-[260px] h-[20px] right-0 absolute top-[-40px] border-b border-grey"></div>
+          <div className="w-[260px] h-[20px] right-0 absolute top-[-40px] border-b border-opacity-30 border-[#d9d9d9]"></div>
         </Reveal>
         <Reveal>
           <div className="pt-[15px] font-semibold">
@@ -36,7 +36,7 @@ const Benefits = () => {
           </div>
         </Reveal>
         <Reveal>
-          <div className="p-[15px] mt-[15px] border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
+          <div className="p-[15px] mt-[15px] border border-[1.5px] border-opacity-30 border-[#d9d9d9] rounded-[12px] overflow-hidden cursor-pointer transform transition duration-200 hover:scale-110">
             <img
               fetchpriority="high"
               className="object-contain"
@@ -51,7 +51,7 @@ const Benefits = () => {
           <h1 className="font-bold text-[30px]">✍️ 기록의 재미를 느껴보세요</h1>
         </Reveal>
         <Reveal>
-          <div className="w-[300px] h-[20px] right-0 absolute top-[-40px] border-b border-grey"></div>
+          <div className="w-[300px] h-[20px] right-0 absolute top-[-40px] border-b border-opacity-30 border-[#d9d9d9]"></div>
         </Reveal>
         <Reveal>
           <div className="pt-[15px] font-semibold">
@@ -61,8 +61,8 @@ const Benefits = () => {
           </div>
         </Reveal>
         <Reveal>
-          <div className="flex gap-[30px] pt-[20px]">
-            <div className="border border-[1.5px] border-grey rounded-[12px] overflow-hidden">
+          <div className="flex gap-[30px] pt-[30px]">
+            <div className="border border-[1.5px] border-opacity-30 border-[#d9d9d9] rounded-[12px] overflow-hidden cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="w-[320px] p-[15px]"
@@ -70,7 +70,7 @@ const Benefits = () => {
                 alt="whole-todo-image"
               />
             </div>
-            <div className="border border-[1.5px] border-grey  rounded-[12px] overflow-hidden">
+            <div className="border border-[1.5px] border-opacity-30 border-[#d9d9d9] rounded-[12px] overflow-hidden cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="w-[320px] p-[15px]"
@@ -86,7 +86,7 @@ const Benefits = () => {
           <h1 className="font-bold text-[30px]">🧐 분석해 드릴게요</h1>
         </Reveal>
         <Reveal>
-          <div className="w-[400px] h-[20px] right-0 absolute top-[-40px] border-b border-grey"></div>
+          <div className="w-[400px] h-[20px] right-0 absolute top-[-40px] border-b border-opacity-30 border-[#d9d9d9]"></div>
         </Reveal>
         <Reveal>
           <div className="pt-[15px] font-semibold">
@@ -95,7 +95,7 @@ const Benefits = () => {
         </Reveal>
         <Reveal>
           <div className="flex gap-[30px] pt-[20px]">
-            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
+            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-opacity-30 border-[#d9d9d9] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="w-[310px] p-[15px]"
@@ -103,7 +103,7 @@ const Benefits = () => {
                 alt="detailAnalysisImage1"
               />
             </div>
-            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
+            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-opacity-30 border-[#d9d9d9] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="w-[310px] p-[15px]"
@@ -120,7 +120,7 @@ const Benefits = () => {
         </Reveal>
         <Reveal>
           <div className="flex gap-[30px] pt-[20px]">
-            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
+            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-opacity-30 border-[#d9d9d9] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="w-[310px] p-[15px]"
@@ -138,7 +138,7 @@ const Benefits = () => {
           </h1>
         </Reveal>
         <Reveal>
-          <div className="w-[230px] h-[20px] right-0 absolute top-[-40px] border-b border-grey"></div>
+          <div className="w-[230px] h-[20px] right-0 absolute top-[-40px] border-b border-opacity-30 border-[#d9d9d9]"></div>
         </Reveal>
         <Reveal>
           <div className="pt-[15px] font-semibold">
@@ -147,7 +147,7 @@ const Benefits = () => {
         </Reveal>
         <Reveal>
           <div className="flex gap-[30px] pt-[20px]">
-            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-grey ">
+            <div className="rounded-[6px] overflow-hidden border-[1.5px] border-opacity-30 border-[#d9d9d9] cursor-pointer transform transition duration-200 hover:scale-110">
               <img
                 fetchpriority="high"
                 className="w-[310px] p-[15px]"

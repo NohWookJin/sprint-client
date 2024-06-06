@@ -19,10 +19,19 @@
 }
 .dark .ql-container {
   color: white;
+  border: white;
 }
 
 .dark .ql-toolbar.ql-snow {
   border: none !important;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #23272f;
   color: white;
+}
+
+.dark .ql-snow .ql-stroke {
+  stroke: white;
+}
+
+.dark .ql-snow .ql-fill {
+  fill: white;
 }

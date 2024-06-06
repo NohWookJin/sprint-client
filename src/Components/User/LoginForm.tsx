@@ -51,13 +51,19 @@ const LoginForm = () => {
       <form
         onSubmit={onSubmit}
         className={`flex flex-col shadow-2xl w-[60%] px-[20px] py-[20px] rounded-[8px] ${
-          darkMode ? "dark: bg-white" : ""
+          darkMode
+            ? "dark: bg-[#23272f] border border-[#d9d9d9] text-white border border-opacity-30"
+            : ""
         }`}
       >
-        <div className="border-b border-[#d9d9d9] pb-[10px]">
+        <div
+          className={`border-b border-[#d9d9d9] pb-[10px] ${
+            darkMode ? "border-opacity-30" : ""
+          }`}
+        >
           <h1
             className={`font-semibold text-[20px] ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white" : ""
             }`}
           >
             로그인
@@ -65,7 +71,11 @@ const LoginForm = () => {
         </div>
         {isNotUser && (
           <div className="w-full mt-[20px]">
-            <div className="flex items-center bg-[#eed3d7] py-[15px] pl-[10px] rounded-[5px]">
+            <div
+              className={`flex items-center  py-[15px] pl-[10px] rounded-[5px] ${
+                darkMode ? "bg-[#FCA5A5]" : "bg-[#eed3d7]"
+              }`}
+            >
               <span className="text-[#ff0000] text-[13.5px]">
                 잘못된 이메일 혹은 비밀번호입니다.
               </span>
@@ -77,16 +87,16 @@ const LoginForm = () => {
             type="text"
             name="email"
             onChange={onChangeField}
-            className={`bg-[#f0f0f0] px-[8px] py-[8px] rounded-[3px] text-[13.5px] focus:border-[#3a7ce1] ${
-              darkMode ? "dark: text-black" : ""
+            className={` px-[8px] py-[8px] rounded-[3px] text-[13.5px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-white bg-[#374151]" : "bg-[#f0f0f0]"
             }`}
           />
           <input
             type="password"
             name="password"
             onChange={onChangeField}
-            className={`bg-[#f0f0f0] px-[8px] py-[8px]  text-[13.5px] rounded-[3px] focus:border-[#3a7ce1] ${
-              darkMode ? "dark: text-black" : ""
+            className={` px-[8px] py-[8px]  text-[13.5px] rounded-[3px] focus:border-[#3a7ce1] ${
+              darkMode ? "dark: text-white bg-[#374151]" : "bg-[#f0f0f0]"
             }`}
           />
         </div>
@@ -105,7 +115,7 @@ const LoginForm = () => {
           <span
             onClick={onClickJoin}
             className={`cursor-pointer opacity-[0.7] text-[12px] text-right ${
-              darkMode ? "dark: text-black" : ""
+              darkMode ? "dark: text-white" : ""
             }`}
           >
             * 회원이 아니신가요?{" "}

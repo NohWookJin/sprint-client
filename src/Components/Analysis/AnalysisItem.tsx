@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
 import { Analysis } from "../../API/getAnalysis";
 import RoutineDetailAnalysisItem from "./RoutineDetailAnalysisItem";
-import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../lib/timeFormatChange";
 import moment from "moment";
+import { useRecoilValue } from "recoil";
+import { themeState } from "../../Store/themeState";
 
 interface AnalysisItemProps {
   item: Analysis;
 }
 
 const AnalysisItem = ({ item }: AnalysisItemProps) => {
-  const {
-    name,
-    routineId,
-    continuity,
-    average,
-    dailyCounts,
-    targetCount,
-    date,
-  } = item;
+  const { name, continuity, average, dailyCounts, targetCount, date } = item;
   const [analysisTable, setAnalysisTable] = useState<number[]>([]);
   const [newDate, setNewDate] = useState<string>(date);
-
-  const naivgate = useNavigate();
+  const isDark = useRecoilValue(themeState);
 
   useEffect(() => {
     const parsedCounts = JSON.parse(dailyCounts);
@@ -39,8 +31,11 @@ const AnalysisItem = ({ item }: AnalysisItemProps) => {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <div
-          onClick={() => naivgate(`/routine/${routineId}`)}
-          className="cursor-pointer w-full text-lg font-semibold text-white rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 shadow-lg py-2 px-4 transform"
+          className={`w-full text-lg font-semibold text-white rounded-lg py-2 px-4 transform ${
+            isDark
+              ? "border border-[#4b5563] bg-[#23272f]  shadow-2xl"
+              : "bg-gradient-to-br from-blue-500 to-blue-800  shadow-lg "
+          }`}
         >
           {name}
         </div>
@@ -75,6 +70,7 @@ const AnalysisItem = ({ item }: AnalysisItemProps) => {
               <RoutineDetailAnalysisItem
                 calendar={analysisTable}
                 targetCount={targetCount}
+                isDark={isDark}
               />
             </div>
           </div>
