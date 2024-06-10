@@ -7,6 +7,7 @@ import { getUserInfo } from "../../API/users";
 import { getCookie } from "../../lib/userCookie";
 import Hero from "../Landing/Hero";
 import Benefits from "../Landing/Benefits";
+import Chatbot from "../Chatbot/Chatbot";
 
 const Main = () => {
   const [isUserLogined, setIsUserLogined] = useState<boolean>(false);
@@ -29,6 +30,7 @@ const Main = () => {
           <Profile />
           <MainTodayRoutine />
           <AnalysisBox />
+          <Chatbot />
         </section>
       ) : (
         <section className="mb-[30px]">
