@@ -89,7 +89,7 @@ const NewRoutineForm = () => {
         </span>
         <div className="flex items-center gap-[30px]">
           <label className="min-w-[300px] flex flex-col">
-            <div>
+            <div className="pb-[30px]">
               <input
                 onChange={onChangeField}
                 name="routineType"
@@ -110,7 +110,7 @@ const NewRoutineForm = () => {
             </div>
           </label>
           <label className="min-w-[300px] flex flex-col">
-            <div>
+            <div className="pb-[30px]">
               <input
                 onChange={onChangeField}
                 name="routineType"
