@@ -15,10 +15,9 @@ const RoutineTodoDetailPast = ({
   targetCount,
 }: RoutineTodoDetailPastProps) => {
   const [visibleCount, setVisibleCount] = useState(7);
-
   const isDark = useRecoilValue(themeState);
 
-  const sortedPast: { [date: string]: Todo[] } = Object.entries(past)
+  const sortedPast = Object.entries(past)
     .sort(([dateA], [dateB]) => (dateA > dateB ? -1 : 1))
     .reduce((acc: { [date: string]: Todo[] }, [date, todos]) => {
       const newDate = new Date(date);
@@ -49,6 +48,8 @@ const RoutineTodoDetailPast = ({
     todos.map((todo) => ({ ...todo, todoDate: date }))
   );
 
+  const displayedTodos = allTodos.slice(0, visibleCount);
+
   return (
     <section className="pb-[60px]">
       <div className="flex flex-col gap-[5px]">
@@ -73,13 +74,18 @@ const RoutineTodoDetailPast = ({
           </p>
         </div>
       ) : (
-        allTodos.slice(0, visibleCount).map((todo) => {
+        displayedTodos.map((todo, index) => {
           const date = todo.todoDate;
           const todosForDate = sortedPast[date];
+
+          if (index % todosForDate.length !== 0) {
+            return null;
+          }
+
           return (
             <div
-              key={todo.id}
-              className={`mt-[20px] w-full text-lg font-semibold rounded-lg shadow-lg  py-4 px-4 transform flex flex-col mb-[5px] ${
+              key={date}
+              className={`mt-[20px] w-full text-lg font-semibold rounded-lg shadow-lg py-4 px-4 transform flex flex-col mb-[5px] ${
                 isDark
                   ? "dark:  border border-[#4b5563]"
                   : "border border-[#d9d9d9] border-opacity-30"
@@ -115,10 +121,10 @@ const RoutineTodoDetailPast = ({
               </div>
               {isClickedPrevTodos[date] && (
                 <ul className="list-disc ml-5 mt-2">
-                  {todosForDate.map((todo) => (
-                    <li key={todo.id} className="text-[13px]">
-                      <span className="pr-[5px]">{todo.content}</span>
-                      <span>{todo.completed ? "(완료)" : "(미완료)"}</span>
+                  {todosForDate.map((todoItem) => (
+                    <li key={todoItem.id} className="text-[13px]">
+                      <span className="pr-[5px]">{todoItem.content}</span>
+                      <span>{todoItem.completed ? "(완료)" : "(미완료)"}</span>
                     </li>
                   ))}
                 </ul>

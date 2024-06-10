@@ -65,4 +65,4 @@ SPRINT의 아키텍처는 다음과 같습니다.
 
 ## Server
 
-👉 [서버 링크](https://www.sprints.co.kr)에서 SPRINT Server 코드를 확인하실 수 있습니다.
+👉 [서버 링크](https://github.com/NohWookJin/sprint-server)에서 SPRINT Server 코드를 확인하실 수 있습니다.
