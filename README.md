@@ -53,7 +53,7 @@
 
 SPRINT의 아키텍처는 다음과 같습니다.
 
-<img width="600" alt="아키텍처" src="https://github.com/NohWookJin/sprint-server/assets/101846817/7f462482-e178-4970-9de0-50d5aaa3f548">
+<img width="600" alt="아키텍처" src="https://github.com/NohWookJin/sprint-server/assets/101846817/a3bd618e-ce7f-4da6-aa2e-51eeb73be946">
 
 ## Development
 
@@ -62,6 +62,17 @@ SPRINT의 아키텍처는 다음과 같습니다.
 - 2024년 03월 - 04월 : SPRINT 기획 및 와이어프레임
 - 2024년 04월 - 05월 : Clent, Server 개발
 - 2024년 06 - (진행중) : 보완 및 운영
+
+## How to Start
+1. 의존성 설치
+```
+node install
+```
+
+2. 실행(로컬)
+```
+npm run dev  
+```
 
 ## Server
 
