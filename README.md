@@ -4,9 +4,10 @@
 
 👉 [서비스 링크](https://www.sprints.co.kr)에서 반복하는 루틴을 만들고 제공되는 분석을 통해 성장해보세요. (운영 종료)
 
-👉 시연 동영상 : [유튜브 링크](https://www.youtube.com/watch?v=GMy85GF8WT8)에서 더 큰 화면으로 확인할 수 있습니다.
+👉 시연 동영상 : [유튜브 링크](https://www.youtube.com/watch?v=GMy85GF8WT8) 혹은 아래의 이미지 클릭을 통해 유튜브에서 확인할 수 있습니다.
 
-<img src="https://github.com/NohWookJin/sprint-client/assets/101846817/ed520e51-cbea-42fe-bc64-4fdc08b438b5" />
+[![SPRINT 시연 동영상](http://img.youtube.com/vi/GMy85GF8WT8/0.jpg)](https://youtu.be/GMy85GF8WT8) 
+
 
 <br /><br />
 
